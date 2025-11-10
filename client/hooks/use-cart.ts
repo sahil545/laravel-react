@@ -45,9 +45,7 @@ export function useCart() {
   };
 
   const removeFromCart = (productId: number) => {
-    setCart((prevCart) =>
-      prevCart.filter((c) => c.product_id !== productId),
-    );
+    setCart((prevCart) => prevCart.filter((c) => c.product_id !== productId));
   };
 
   const updateQuantity = (productId: number, quantity: number) => {

@@ -32,7 +32,8 @@ export default function SimilarProductsCarousel({
 
   const itemsPerView = 4;
   const canScrollLeft = currentIndex > 0;
-  const canScrollRight = currentIndex < Math.max(0, products.length - itemsPerView);
+  const canScrollRight =
+    currentIndex < Math.max(0, products.length - itemsPerView);
 
   const handlePrev = () => {
     setCurrentIndex(Math.max(0, currentIndex - 1));
@@ -42,7 +43,10 @@ export default function SimilarProductsCarousel({
     setCurrentIndex(Math.min(products.length - itemsPerView, currentIndex + 1));
   };
 
-  const visibleProducts = products.slice(currentIndex, currentIndex + itemsPerView);
+  const visibleProducts = products.slice(
+    currentIndex,
+    currentIndex + itemsPerView,
+  );
 
   if (loading || products.length === 0) {
     return null;
@@ -76,7 +80,8 @@ export default function SimilarProductsCarousel({
                       alt={product.product_name}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                       onError={(e) => {
-                        e.currentTarget.src = "https://via.placeholder.com/200?text=No+Image";
+                        e.currentTarget.src =
+                          "https://via.placeholder.com/200?text=No+Image";
                       }}
                     />
                   </div>

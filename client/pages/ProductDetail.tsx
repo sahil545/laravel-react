@@ -2,7 +2,13 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Product, Vendor, getProducts, getVendors, getProductImageUrl } from "@/lib/api";
+import {
+  Product,
+  Vendor,
+  getProducts,
+  getVendors,
+  getProductImageUrl,
+} from "@/lib/api";
 import { useCart } from "@/hooks/use-cart";
 import { ChevronLeft, ShoppingCart, Plus, Minus } from "lucide-react";
 import SimilarProductsCarousel from "@/components/SimilarProductsCarousel";
@@ -31,7 +37,9 @@ export default function ProductDetail() {
 
     if (foundProduct) {
       const vendors = await getVendors();
-      const foundVendor = vendors.find((v) => v.vendor_id === foundProduct.vendor_id);
+      const foundVendor = vendors.find(
+        (v) => v.vendor_id === foundProduct.vendor_id,
+      );
       setVendor(foundVendor || null);
 
       setSelectedImage(foundProduct.product_thumbnail);
@@ -93,7 +101,10 @@ export default function ProductDetail() {
   }
 
   const colors = product.product_colors?.split(",").map((c) => c.trim()) || [];
-  const allImages = [product.product_thumbnail, ...(product.gallery_images || [])];
+  const allImages = [
+    product.product_thumbnail,
+    ...(product.gallery_images || []),
+  ];
 
   return (
     <div className="min-h-screen bg-white">
@@ -175,7 +186,9 @@ export default function ProductDetail() {
                     In Stock ({product.product_quantity} available)
                   </span>
                 ) : (
-                  <span className="text-red-600 font-semibold">Out of Stock</span>
+                  <span className="text-red-600 font-semibold">
+                    Out of Stock
+                  </span>
                 )}
               </div>
             </div>

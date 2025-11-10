@@ -3,7 +3,13 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ProductFilters, { FilterState } from "@/components/ProductFilters";
 import Pagination from "@/components/Pagination";
-import { Product, Vendor, getProducts, getVendors, getProductImageUrl } from "@/lib/api";
+import {
+  Product,
+  Vendor,
+  getProducts,
+  getVendors,
+  getProductImageUrl,
+} from "@/lib/api";
 import { Link } from "react-router-dom";
 
 const PRODUCTS_PER_PAGE = 12;
@@ -57,7 +63,9 @@ export default function Shop() {
 
     // Price range filter
     filtered = filtered.filter(
-      (p) => p.product_price >= filters.priceRange[0] && p.product_price <= filters.priceRange[1],
+      (p) =>
+        p.product_price >= filters.priceRange[0] &&
+        p.product_price <= filters.priceRange[1],
     );
 
     // Vendor filter
@@ -88,7 +96,10 @@ export default function Shop() {
   };
 
   const handleResetFilters = () => {
-    const maxPrice = Math.max(...allProducts.map((p) => p.product_price), 10000);
+    const maxPrice = Math.max(
+      ...allProducts.map((p) => p.product_price),
+      10000,
+    );
     setFilters({
       searchTerm: "",
       priceRange: [0, maxPrice],
@@ -133,7 +144,8 @@ export default function Shop() {
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-2">Shop</h1>
           <p className="text-gray-600">
-            Showing {paginatedProducts.length} of {filteredProducts.length} products
+            Showing {paginatedProducts.length} of {filteredProducts.length}{" "}
+            products
           </p>
         </div>
 
@@ -194,7 +206,9 @@ export default function Shop() {
                             ₹{product.product_price.toLocaleString("en-IN")}
                           </span>
                           <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded">
-                            {product.product_quantity > 0 ? "In Stock" : "Out of Stock"}
+                            {product.product_quantity > 0
+                              ? "In Stock"
+                              : "Out of Stock"}
                           </span>
                         </div>
                       </div>

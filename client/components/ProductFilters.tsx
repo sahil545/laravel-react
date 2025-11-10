@@ -119,9 +119,7 @@ export default function ProductFilters({
           <div className="space-y-3">
             <Slider
               value={priceRange}
-              onValueChange={(value) =>
-                setPriceRange([value[0], value[1]])
-              }
+              onValueChange={(value) => setPriceRange([value[0], value[1]])}
               min={0}
               max={maxPrice}
               step={100}
