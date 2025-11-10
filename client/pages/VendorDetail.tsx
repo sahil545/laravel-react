@@ -80,7 +80,8 @@ export default function VendorDetail() {
 
         {/* Vendor Info */}
         <div className="bg-gradient-to-r from-[#070418] to-[#1a1627] rounded-lg p-8 text-white mb-12">
-          <h1 className="text-4xl font-bold mb-4">{vendor.name}</h1>
+          <h1 className="text-4xl font-bold mb-2">{vendor.shop_name || vendor.name}</h1>
+          <p className="text-lg text-gray-400 mb-4">Owner: {vendor.name}</p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
