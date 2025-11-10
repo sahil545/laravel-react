@@ -37,13 +37,11 @@ export interface Product {
 
 export async function getVendors(): Promise<Vendor[]> {
   try {
-    const response = await fetch(`${API_BASE_URL}/users`);
+    const response = await fetch(`${API_BASE_URL}/vendors`);
     const data = await response.json();
 
     if (data.status && Array.isArray(data.data)) {
-      return data.data.filter(
-        (user: Vendor) => user.role === "vendor" && user.status === 1,
-      );
+      return data.data;
     }
     return [];
   } catch (error) {
