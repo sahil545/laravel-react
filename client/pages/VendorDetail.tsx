@@ -127,15 +127,16 @@ export default function VendorDetail() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {products.map((product) => (
-                <div
+                <Link
                   key={product.product_id}
-                  className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+                  to={`/product/${product.product_id}`}
+                  className="group bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
                 >
                   <div className="bg-gray-200 h-48 overflow-hidden flex items-center justify-center">
                     <img
                       src={getProductImageUrl(product.product_thumbnail)}
                       alt={product.product_name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                       onError={(e) => {
                         e.currentTarget.src =
                           "https://via.placeholder.com/200?text=No+Image";
@@ -143,7 +144,7 @@ export default function VendorDetail() {
                     />
                   </div>
                   <div className="p-4">
-                    <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2">
+                    <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600">
                       {product.product_name}
                     </h3>
                     <p className="text-sm text-gray-600 mb-3 line-clamp-2">
@@ -151,14 +152,14 @@ export default function VendorDetail() {
                     </p>
                     <div className="flex justify-between items-center">
                       <span className="text-xl font-bold text-[#070418]">
-                        ₹{product.product_price}
+                        ₹{product.product_price.toLocaleString("en-IN")}
                       </span>
                       <span className="text-sm text-gray-500">
                         Stock: {product.product_quantity}
                       </span>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           )}
