@@ -12,19 +12,19 @@ import {
 import { ChevronLeft } from "lucide-react";
 
 export default function VendorDetail() {
-  const { id } = useParams<{ id: string }>();
+  const { vendor_id } = useParams<{ vendor_id: string }>();
   const [vendor, setVendor] = useState<Vendor | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchData();
-  }, [id]);
+  }, [vendor_id]);
 
   const fetchData = async () => {
     setLoading(true);
 
-    const vendorId = parseInt(id || "0", 10);
+    const vendorId = parseInt(vendor_id || "0", 10);
 
     const vendors = await getVendors();
     const foundVendor = vendors.find((v) => v.id === vendorId);
