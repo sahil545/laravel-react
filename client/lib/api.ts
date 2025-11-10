@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://ecommerce.standtogetherhelp.com/api";
+const API_BASE_URL = "/api";
 
 export interface Vendor {
   id: number;
