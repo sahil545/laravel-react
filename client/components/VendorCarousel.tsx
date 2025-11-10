@@ -21,7 +21,8 @@ export default function VendorCarousel() {
 
   const itemsPerView = 5;
   const canScrollLeft = currentIndex > 0;
-  const canScrollRight = currentIndex < Math.max(0, vendors.length - itemsPerView);
+  const canScrollRight =
+    currentIndex < Math.max(0, vendors.length - itemsPerView);
 
   const handlePrev = () => {
     setCurrentIndex(Math.max(0, currentIndex - 1));
@@ -31,7 +32,10 @@ export default function VendorCarousel() {
     setCurrentIndex(Math.min(vendors.length - itemsPerView, currentIndex + 1));
   };
 
-  const visibleVendors = vendors.slice(currentIndex, currentIndex + itemsPerView);
+  const visibleVendors = vendors.slice(
+    currentIndex,
+    currentIndex + itemsPerView,
+  );
 
   return (
     <section className="w-full bg-[#070418] border border-[#323232] py-12 md:py-16">

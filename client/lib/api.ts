@@ -39,9 +39,11 @@ export async function getVendors(): Promise<Vendor[]> {
   try {
     const response = await fetch(`${API_BASE_URL}/users`);
     const data = await response.json();
-    
+
     if (data.status && Array.isArray(data.data)) {
-      return data.data.filter((user: Vendor) => user.role === "vendor" && user.status === 1);
+      return data.data.filter(
+        (user: Vendor) => user.role === "vendor" && user.status === 1,
+      );
     }
     return [];
   } catch (error) {
@@ -54,7 +56,7 @@ export async function getProducts(): Promise<Product[]> {
   try {
     const response = await fetch(`${API_BASE_URL}/products`);
     const data = await response.json();
-    
+
     if (data.status && Array.isArray(data.data)) {
       return data.data;
     }

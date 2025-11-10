@@ -2,7 +2,13 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Vendor, Product, getVendors, getProducts, getProductImageUrl } from "@/lib/api";
+import {
+  Vendor,
+  Product,
+  getVendors,
+  getProducts,
+  getProductImageUrl,
+} from "@/lib/api";
 import { ChevronLeft } from "lucide-react";
 
 export default function VendorDetail() {
@@ -17,17 +23,17 @@ export default function VendorDetail() {
 
   const fetchData = async () => {
     setLoading(true);
-    
+
     const vendorId = parseInt(id || "0", 10);
-    
+
     const vendors = await getVendors();
-    const foundVendor = vendors.find(v => v.id === vendorId);
+    const foundVendor = vendors.find((v) => v.id === vendorId);
     setVendor(foundVendor || null);
 
     const allProducts = await getProducts();
-    const vendorProducts = allProducts.filter(p => p.vendor_id === vendorId);
+    const vendorProducts = allProducts.filter((p) => p.vendor_id === vendorId);
     setProducts(vendorProducts);
-    
+
     setLoading(false);
   };
 
@@ -61,11 +67,11 @@ export default function VendorDetail() {
   return (
     <div className="min-h-screen bg-white">
       <Header />
-      
+
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Back Button */}
-        <Link 
-          to="/" 
+        <Link
+          to="/"
           className="inline-flex items-center gap-2 text-blue-500 hover:text-blue-700 mb-8"
         >
           <ChevronLeft className="w-5 h-5" />
@@ -75,7 +81,7 @@ export default function VendorDetail() {
         {/* Vendor Info */}
         <div className="bg-gradient-to-r from-[#070418] to-[#1a1627] rounded-lg p-8 text-white mb-12">
           <h1 className="text-4xl font-bold mb-4">{vendor.name}</h1>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <p className="text-gray-300 mb-2">
@@ -83,21 +89,25 @@ export default function VendorDetail() {
               </p>
               {vendor.phone_number && (
                 <p className="text-gray-300 mb-2">
-                  <span className="font-semibold">Phone:</span> {vendor.phone_number}
+                  <span className="font-semibold">Phone:</span>{" "}
+                  {vendor.phone_number}
                 </p>
               )}
               {vendor.address && (
                 <p className="text-gray-300 mb-2">
-                  <span className="font-semibold">Address:</span> {vendor.address}
+                  <span className="font-semibold">Address:</span>{" "}
+                  {vendor.address}
                 </p>
               )}
               <p className="text-gray-300 mb-2">
-                <span className="font-semibold">Username:</span> {vendor.username}
+                <span className="font-semibold">Username:</span>{" "}
+                {vendor.username}
               </p>
             </div>
             <div>
               <p className="text-gray-300">
-                <span className="font-semibold">Member Since:</span> {new Date(vendor.created_at).toLocaleDateString()}
+                <span className="font-semibold">Member Since:</span>{" "}
+                {new Date(vendor.created_at).toLocaleDateString()}
               </p>
             </div>
           </div>
@@ -110,7 +120,9 @@ export default function VendorDetail() {
           </h2>
 
           {products.length === 0 ? (
-            <p className="text-lg text-gray-600">No products available from this vendor.</p>
+            <p className="text-lg text-gray-600">
+              No products available from this vendor.
+            </p>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {products.map((product) => (
@@ -124,7 +136,8 @@ export default function VendorDetail() {
                       alt={product.product_name}
                       className="w-full h-full object-cover"
                       onError={(e) => {
-                        e.currentTarget.src = "https://via.placeholder.com/200?text=No+Image";
+                        e.currentTarget.src =
+                          "https://via.placeholder.com/200?text=No+Image";
                       }}
                     />
                   </div>
