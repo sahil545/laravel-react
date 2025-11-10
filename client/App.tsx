@@ -33,7 +33,3 @@ const container = document.getElementById("root");
 if (container && !container.hasChildNodes()) {
   createRoot(container).render(<App />);
 }
-
-if (import.meta.hot) {
-  import.meta.hot.accept();
-}
