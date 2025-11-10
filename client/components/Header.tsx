@@ -13,7 +13,7 @@ export default function Header() {
               <path d="M14.197 11.9995C14.271 13.5415 12.9165 14.146 12.1875 13.854C11.1345 13.4325 11.417 12.7085 11.146 11.2085C10.875 9.7085 9.8335 8.667 8.292 8.2085C9.417 11.375 7.6685 12.542 6.752 12.7505C5.816 12.9635 4.8755 12.75 4.768 10.747C3.676 11.834 3 13.338 3 15C3 15.184 3.0115 15.365 3.0275 15.545C4.5625 17.062 6.671 18 9 18C11.329 18 13.4375 17.062 14.9725 15.545C14.9885 15.365 15 15.184 15 15C15 13.9065 14.708 12.882 14.197 11.9995Z" fill="#FFCC4D"/>
             </svg>
             <span className="font-jakarta font-bold text-[18px] leading-[25.2px]">
-              Free shipping on all U.S. orders $50+ dd
+              Free shipping on all U.S. orders $50+
             </span>
           </div>
           <button className="ml-4 bg-white rounded-[7px] px-5 py-2 font-jakarta font-bold text-[15px]">
