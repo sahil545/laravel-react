@@ -69,6 +69,11 @@ export async function getProducts(): Promise<Product[]> {
   }
 }
 
-export function getProductImageUrl(filename: string): string {
-  return `https://ecommerce.standtogetherhelp.com/storage/products/${filename}`;
+export function getProductImageUrl(imageUrl: string): string {
+  // If it's already a full URL, return as-is
+  if (imageUrl.startsWith("http")) {
+    return imageUrl;
+  }
+  // Otherwise construct the full URL (fallback for filename-only cases)
+  return `https://ecommerce.standtogetherhelp.com/storage/products/${imageUrl}`;
 }
