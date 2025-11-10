@@ -28,24 +28,24 @@ interface ProductsResponse {
 export const handleGetProducts: RequestHandler = async (req, res) => {
   try {
     const response = await fetch(`${LARAVEL_API_URL}/products`);
-    
+
     if (!response.ok) {
       throw new Error(`Laravel API responded with status ${response.status}`);
     }
-    
+
     const data: ProductsResponse = await response.json();
-    
+
     if (data.status && Array.isArray(data.data)) {
       return res.json(data);
     }
-    
+
     res.json({ status: false, data: [] });
   } catch (error) {
     console.error("Error fetching products from Laravel API:", error);
-    res.status(500).json({ 
-      status: false, 
-      data: [], 
-      error: error instanceof Error ? error.message : "Unknown error" 
+    res.status(500).json({
+      status: false,
+      data: [],
+      error: error instanceof Error ? error.message : "Unknown error",
     });
   }
 };

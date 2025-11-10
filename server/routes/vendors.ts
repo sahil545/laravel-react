@@ -27,27 +27,27 @@ interface VendorsResponse {
 export const handleGetVendors: RequestHandler = async (req, res) => {
   try {
     const response = await fetch(`${LARAVEL_API_URL}/users`);
-    
+
     if (!response.ok) {
       throw new Error(`Laravel API responded with status ${response.status}`);
     }
-    
+
     const data: VendorsResponse = await response.json();
-    
+
     if (data.status && Array.isArray(data.data)) {
       const vendors = data.data.filter(
-        (user: Vendor) => user.role === "vendor" && user.status === 1
+        (user: Vendor) => user.role === "vendor" && user.status === 1,
       );
       return res.json({ status: true, data: vendors });
     }
-    
+
     res.json({ status: false, data: [] });
   } catch (error) {
     console.error("Error fetching vendors from Laravel API:", error);
-    res.status(500).json({ 
-      status: false, 
-      data: [], 
-      error: error instanceof Error ? error.message : "Unknown error" 
+    res.status(500).json({
+      status: false,
+      data: [],
+      error: error instanceof Error ? error.message : "Unknown error",
     });
   }
 };
