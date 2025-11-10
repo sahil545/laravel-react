@@ -64,12 +64,12 @@ export default function VendorCarousel() {
                   {visibleVendors.map((vendor) => (
                     <Link
                       key={vendor.id}
-                      to={`/vendor/${vendor.id}`}
+                      to={`/vendor/${vendor.vendor_id}`}
                       className="bg-white rounded-lg p-6 flex items-center justify-center h-[120px] hover:shadow-lg transition-shadow cursor-pointer"
                     >
                       <div className="text-center">
                         <p className="text-sm font-semibold text-[#070418] truncate">
-                          {vendor.name}
+                          {vendor.shop_name || vendor.name}
                         </p>
                       </div>
                     </Link>
