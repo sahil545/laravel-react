@@ -18,6 +18,7 @@ export interface Product {
   brand_id: number;
   vendor_id: number;
   product_quantity: number;
+  gallery_images?: string[];
 }
 
 interface ProductsResponse {
