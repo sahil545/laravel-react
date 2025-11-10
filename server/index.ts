@@ -20,6 +20,8 @@ export function createServer() {
   });
 
   app.get("/api/demo", handleDemo);
+  app.get("/api/vendors", handleGetVendors);
+  app.get("/api/products", handleGetProducts);
 
   return app;
 }
