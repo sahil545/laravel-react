@@ -117,7 +117,7 @@ export default function VendorDetail() {
         {/* Products Section */}
         <div>
           <h2 className="text-3xl font-bold mb-8">
-            Products from {vendor.name}
+            Products from {vendor.shop_name || vendor.name}
           </h2>
 
           {products.length === 0 ? (
