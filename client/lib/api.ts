@@ -15,6 +15,9 @@ export interface Vendor {
   social_type: string | null;
   created_at: string;
   updated_at: string;
+  vendor_id: number;
+  shop_name: string;
+  shop_description: string | null;
 }
 
 export interface Product {
