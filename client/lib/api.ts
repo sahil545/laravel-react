@@ -36,6 +36,7 @@ export interface Product {
   brand_id: number;
   vendor_id: number;
   product_quantity: number;
+  gallery_images?: string[];
 }
 
 export async function getVendors(): Promise<Vendor[]> {
