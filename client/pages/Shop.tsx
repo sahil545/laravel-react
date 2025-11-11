@@ -98,7 +98,7 @@ export default function Shop() {
   const handleResetFilters = () => {
     const maxPrice = Math.max(
       ...allProducts.map((p) => p.product_price),
-      10000,
+      500,
     );
     setFilters({
       searchTerm: "",
