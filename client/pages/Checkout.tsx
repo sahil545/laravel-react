@@ -101,8 +101,8 @@ export default function Checkout() {
                   {formData.postalCode}
                 </p>
                 <p>
-                  <span className="font-semibold">Order Total:</span> ₹
-                  {total.toLocaleString("en-IN")}
+                  <span className="font-semibold">Order Total:</span> $
+                  {total.toLocaleString("en-US")}
                 </p>
                 <p>
                   <span className="font-semibold">Items:</span> {cart.length}
@@ -358,7 +358,7 @@ export default function Checkout() {
                 type="submit"
                 className="w-full bg-blue-600 text-white py-4 rounded-lg font-bold text-lg hover:bg-blue-700 transition"
               >
-                Place Order (₹{total.toLocaleString("en-IN")})
+                Place Order (${total.toLocaleString("en-US")})
               </button>
             </form>
           </div>
@@ -395,10 +395,10 @@ export default function Checkout() {
                           Qty: {item.quantity}
                         </p>
                         <p className="text-sm font-semibold text-blue-600">
-                          ₹
+                          $
                           {(
                             item.product_price * item.quantity
-                          ).toLocaleString("en-IN")}
+                          ).toLocaleString("en-US")}
                         </p>
                       </div>
                     </div>
@@ -410,11 +410,11 @@ export default function Checkout() {
               <div className="space-y-3 mb-6 pb-6 border-b border-gray-200">
                 <div className="flex justify-between text-gray-600">
                   <span>Subtotal</span>
-                  <span>₹{subtotal.toLocaleString("en-IN")}</span>
+                  <span>${subtotal.toLocaleString("en-US")}</span>
                 </div>
                 <div className="flex justify-between text-gray-600">
                   <span>Tax (5%)</span>
-                  <span>₹{taxAmount.toLocaleString("en-IN")}</span>
+                  <span>${taxAmount.toLocaleString("en-US")}</span>
                 </div>
                 <div className="flex justify-between text-gray-600">
                   <span>Shipping</span>
@@ -422,7 +422,7 @@ export default function Checkout() {
                     {shippingCost === 0 ? (
                       <span className="text-green-600">FREE</span>
                     ) : (
-                      `₹${shippingCost}`
+                      `$${shippingCost}`
                     )}
                   </span>
                 </div>
@@ -431,7 +431,7 @@ export default function Checkout() {
               <div className="flex justify-between mb-6">
                 <span className="text-lg font-bold text-gray-900">Total</span>
                 <span className="text-2xl font-bold text-blue-600">
-                  ₹{total.toLocaleString("en-IN")}
+                  ${total.toLocaleString("en-US")}
                 </span>
               </div>
             </div>
