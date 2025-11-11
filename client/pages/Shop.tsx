@@ -203,7 +203,7 @@ export default function Shop() {
                         </p>
                         <div className="flex justify-between items-center">
                           <span className="text-xl font-bold text-[#070418]">
-                            ₹{product.product_price.toLocaleString("en-IN")}
+                            ${product.product_price.toLocaleString("en-US")}
                           </span>
                           <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded">
                             {product.product_quantity > 0

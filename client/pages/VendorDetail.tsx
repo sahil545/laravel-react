@@ -156,7 +156,7 @@ export default function VendorDetail() {
                     </p>
                     <div className="flex justify-between items-center">
                       <span className="text-xl font-bold text-[#070418]">
-                        ₹{product.product_price.toLocaleString("en-IN")}
+                        ${product.product_price.toLocaleString("en-US")}
                       </span>
                       <span className="text-sm text-gray-500">
                         Stock: {product.product_quantity}
