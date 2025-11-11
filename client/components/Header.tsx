@@ -23,7 +23,7 @@ export default function Header() {
               />
             </svg>
             <span className="font-jakarta font-bold text-[18px] leading-[25.2px]">
-              Free shipping on all U.S. orders $50+ dd
+              Free shipping on all U.S. orders $50+ Exclusively
             </span>
           </div>
           <button className="ml-4 bg-white rounded-[7px] px-5 py-2 font-jakarta font-bold text-[15px]">
