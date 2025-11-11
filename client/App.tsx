@@ -9,9 +9,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import VendorDetail from "./pages/VendorDetail";
+import Vendors from "./pages/Vendors";
 import ProductDetail from "./pages/ProductDetail";
 import Shop from "./pages/Shop";
-import Vendors from "./pages/Vendors";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 
@@ -26,7 +26,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/shop" element={<Shop />} />
-          <Route path="/vendors" element={<Vendors />} />
+          <Route path="/vendor" element={<Vendors />} />
           <Route path="/vendor/:vendor_id" element={<VendorDetail />} />
           <Route path="/product/:product_id" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
