@@ -22,7 +22,7 @@ export default function Shop() {
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState<FilterState>({
     searchTerm: "",
-    priceRange: [0, 10000],
+    priceRange: [0, 5000],
     vendors: [],
     brands: [],
     categories: [],
@@ -48,6 +48,16 @@ export default function Shop() {
     setAllProducts(products);
     setVendors(vendorsList);
     setFilteredProducts(products);
+
+    // Set initial price range based on actual product prices
+    if (products.length > 0) {
+      const maxPrice = Math.max(...products.map((p) => p.product_price));
+      setFilters((prev) => ({
+        ...prev,
+        priceRange: [0, maxPrice],
+      }));
+    }
+
     setLoading(false);
   };
 
@@ -96,10 +106,10 @@ export default function Shop() {
   };
 
   const handleResetFilters = () => {
-    const maxPrice = Math.max(
-      ...allProducts.map((p) => p.product_price),
-      10000,
-    );
+    const maxPrice =
+      allProducts.length > 0
+        ? Math.max(...allProducts.map((p) => p.product_price))
+        : 500;
     setFilters({
       searchTerm: "",
       priceRange: [0, maxPrice],
@@ -203,7 +213,7 @@ export default function Shop() {
                         </p>
                         <div className="flex justify-between items-center">
                           <span className="text-xl font-bold text-[#070418]">
-                            ₹{product.product_price.toLocaleString("en-IN")}
+                            ${product.product_price.toLocaleString("en-US")}
                           </span>
                           <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded">
                             {product.product_quantity > 0

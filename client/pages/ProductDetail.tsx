@@ -178,7 +178,7 @@ export default function ProductDetail() {
             {/* Price */}
             <div className="mb-6">
               <div className="text-3xl font-bold text-[#070418] mb-2">
-                ₹{product.product_price.toLocaleString("en-IN")}
+                ${product.product_price.toLocaleString("en-US")}
               </div>
               <div className="flex items-center gap-2">
                 {product.product_quantity > 0 ? (
