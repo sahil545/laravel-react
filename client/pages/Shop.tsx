@@ -22,7 +22,7 @@ export default function Shop() {
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState<FilterState>({
     searchTerm: "",
-    priceRange: [0, 10000],
+    priceRange: [0, 500],
     vendors: [],
     brands: [],
     categories: [],
