@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import { ShoppingCart, User, X } from "lucide-react";
+import { useCart } from "@/hooks/use-cart";
 
 export default function Header() {
+  const { cart } = useCart();
+  const cartItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+
   return (
     <>
       {/* Promo Banner */}
@@ -31,9 +35,9 @@ export default function Header() {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link to="/" className="flex-shrink-0">
-              <img 
-                src="https://api.builder.io/api/v1/image/assets/TEMP/166b3b778a297e21a1d679bc543c6f4ff198af27?width=828" 
-                alt="The Activelist" 
+              <img
+                src="https://api.builder.io/api/v1/image/assets/TEMP/166b3b778a297e21a1d679bc543c6f4ff198af27?width=828"
+                alt="The Activelist"
                 className="h-12 w-auto"
               />
             </Link>
@@ -42,25 +46,30 @@ export default function Header() {
             <nav className="hidden lg:flex items-center gap-8 text-[18px] font-poppins font-medium">
               <Link to="/" className="hover:text-brand-green transition">Home</Link>
               <Link to="/shop" className="hover:text-brand-green transition">Shop</Link>
+              <Link to="/vendors" className="hover:text-brand-green transition">Vendors</Link>
               <Link to="/features" className="hover:text-brand-green transition">Features</Link>
-              <Link to="/vendor" className="hover:text-brand-green transition">Vendor</Link>
               <Link to="/contact" className="hover:text-brand-green transition">Contact</Link>
             </nav>
 
             {/* Right Side Actions */}
             <div className="flex items-center gap-6">
-              <button className="hidden md:block">
+              <Link to="/cart" className="hidden md:flex relative hover:text-blue-600 transition">
                 <ShoppingCart className="w-6 h-6" />
-              </button>
-              <button className="hidden md:block">
+                {cartItemCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                    {cartItemCount}
+                  </span>
+                )}
+              </Link>
+              <button className="hidden md:block hover:text-blue-600 transition">
                 <User className="w-6 h-6" />
               </button>
-              <Link to="/login" className="hidden lg:block font-poppins font-medium text-[18px]">
+              <Link to="/login" className="hidden lg:block font-poppins font-medium text-[18px] hover:text-blue-600 transition">
                 Login
               </Link>
-              <Link 
-                to="/seller-signup" 
-                className="hidden lg:inline-flex items-center justify-center px-4 py-3 bg-brand-blue text-white rounded-[10px] font-poppins font-medium text-[18px]"
+              <Link
+                to="/seller-signup"
+                className="hidden lg:inline-flex items-center justify-center px-4 py-3 bg-brand-blue text-white rounded-[10px] font-poppins font-medium text-[18px] hover:opacity-90 transition"
               >
                 Seller Sign Up
               </Link>
