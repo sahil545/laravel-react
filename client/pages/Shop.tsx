@@ -48,6 +48,16 @@ export default function Shop() {
     setAllProducts(products);
     setVendors(vendorsList);
     setFilteredProducts(products);
+
+    // Set initial price range based on actual product prices
+    if (products.length > 0) {
+      const maxPrice = Math.max(...products.map((p) => p.product_price));
+      setFilters((prev) => ({
+        ...prev,
+        priceRange: [0, maxPrice],
+      }));
+    }
+
     setLoading(false);
   };
 
