@@ -2,6 +2,8 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import { handleDemo } from "./routes/demo";
+import { handleGetVendors } from "./routes/vendors";
+import { handleGetProducts } from "./routes/products";
 
 export function createServer() {
   const app = express();
@@ -18,6 +20,8 @@ export function createServer() {
   });
 
   app.get("/api/demo", handleDemo);
+  app.get("/api/vendors", handleGetVendors);
+  app.get("/api/products", handleGetProducts);
 
   return app;
 }
