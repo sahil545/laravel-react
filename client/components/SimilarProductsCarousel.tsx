@@ -90,7 +90,7 @@ export default function SimilarProductsCarousel({
                       {product.product_name}
                     </h3>
                     <p className="text-xl font-bold text-[#070418]">
-                      ₹{product.product_price.toLocaleString("en-IN")}
+                      ${product.product_price.toLocaleString("en-US")}
                     </p>
                   </div>
                 </Link>
