@@ -37,7 +37,9 @@ export const handleGetProducts: RequestHandler = async (req, res) => {
     const data: ProductsResponse = await response.json();
 
     if (data.status && Array.isArray(data.data)) {
-      const activeProducts = data.data.filter((product) => product.product_status === "1");
+      const activeProducts = data.data.filter(
+        (product) => product.product_status === "1",
+      );
       return res.json({ status: true, data: activeProducts });
     }
 

@@ -35,11 +35,12 @@ export default function Vendors() {
     let filtered = [...vendors];
 
     if (searchTerm) {
-      filtered = filtered.filter((v) =>
-        (v.shop_name || v.name)
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase()) ||
-        v.email.toLowerCase().includes(searchTerm.toLowerCase()),
+      filtered = filtered.filter(
+        (v) =>
+          (v.shop_name || v.name)
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase()) ||
+          v.email.toLowerCase().includes(searchTerm.toLowerCase()),
       );
     }
 

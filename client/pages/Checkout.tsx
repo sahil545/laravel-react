@@ -155,11 +155,7 @@ export default function Checkout() {
       return;
     }
 
-    if (
-      !formData.cardNumber ||
-      !formData.expiryDate ||
-      !formData.cvv
-    ) {
+    if (!formData.cardNumber || !formData.expiryDate || !formData.cvv) {
       alert("Please fill in all payment details");
       return;
     }
@@ -396,9 +392,9 @@ export default function Checkout() {
                         </p>
                         <p className="text-sm font-semibold text-blue-600">
                           $
-                          {(
-                            item.product_price * item.quantity
-                          ).toLocaleString("en-US")}
+                          {(item.product_price * item.quantity).toLocaleString(
+                            "en-US",
+                          )}
                         </p>
                       </div>
                     </div>

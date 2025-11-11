@@ -146,10 +146,7 @@ export default function Cart() {
                           </span>
                           <button
                             onClick={() =>
-                              updateQuantity(
-                                item.product_id,
-                                item.quantity + 1,
-                              )
+                              updateQuantity(item.product_id, item.quantity + 1)
                             }
                             className="p-2 hover:bg-gray-100 transition"
                             aria-label="Increase quantity"
@@ -160,9 +157,7 @@ export default function Cart() {
 
                         {/* Subtotal and Remove */}
                         <div className="text-right">
-                          <p className="text-sm text-gray-600 mb-2">
-                            Subtotal
-                          </p>
+                          <p className="text-sm text-gray-600 mb-2">Subtotal</p>
                           <p className="text-lg font-bold text-gray-900 mb-4">
                             $
                             {(
@@ -230,9 +225,7 @@ export default function Cart() {
 
               <div className="mb-6 pb-6 border-b border-gray-200">
                 <div className="flex justify-between mb-4">
-                  <span className="text-lg font-bold text-gray-900">
-                    Total
-                  </span>
+                  <span className="text-lg font-bold text-gray-900">Total</span>
                   <span className="text-2xl font-bold text-blue-600">
                     ${finalTotal.toLocaleString("en-US")}
                   </span>

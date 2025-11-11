@@ -106,9 +106,10 @@ export default function Shop() {
   };
 
   const handleResetFilters = () => {
-    const maxPrice = allProducts.length > 0
-      ? Math.max(...allProducts.map((p) => p.product_price))
-      : 500;
+    const maxPrice =
+      allProducts.length > 0
+        ? Math.max(...allProducts.map((p) => p.product_price))
+        : 500;
     setFilters({
       searchTerm: "",
       priceRange: [0, maxPrice],
