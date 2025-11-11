@@ -122,7 +122,7 @@ export default function Cart() {
                           {item.product_name}
                         </Link>
                         <p className="text-2xl font-bold text-blue-600">
-                          ₹{item.product_price.toLocaleString("en-IN")}
+                          ${item.product_price.toLocaleString("en-US")}
                         </p>
                       </div>
 
@@ -164,10 +164,10 @@ export default function Cart() {
                             Subtotal
                           </p>
                           <p className="text-lg font-bold text-gray-900 mb-4">
-                            ₹
+                            $
                             {(
                               item.product_price * item.quantity
-                            ).toLocaleString("en-IN")}
+                            ).toLocaleString("en-US")}
                           </p>
                           <button
                             onClick={() => removeFromCart(item.product_id)}
@@ -196,14 +196,14 @@ export default function Cart() {
                 <div className="flex justify-between">
                   <span className="text-gray-600">Subtotal</span>
                   <span className="font-semibold">
-                    ₹{subtotal.toLocaleString("en-IN")}
+                    ${subtotal.toLocaleString("en-US")}
                   </span>
                 </div>
 
                 <div className="flex justify-between">
                   <span className="text-gray-600">Tax (5%)</span>
                   <span className="font-semibold">
-                    ₹{taxAmount.toLocaleString("en-IN")}
+                    ${taxAmount.toLocaleString("en-US")}
                   </span>
                 </div>
 
@@ -213,7 +213,7 @@ export default function Cart() {
                     {shippingCost === 0 ? (
                       <span className="text-green-600">FREE</span>
                     ) : (
-                      `₹${shippingCost}`
+                      `$${shippingCost}`
                     )}
                   </span>
                 </div>
@@ -222,7 +222,7 @@ export default function Cart() {
                   <div className="flex justify-between text-green-600">
                     <span>Discount ({appliedPromo})</span>
                     <span className="font-semibold">
-                      -₹{discount.toLocaleString("en-IN")}
+                      -${discount.toLocaleString("en-US")}
                     </span>
                   </div>
                 )}
@@ -234,13 +234,13 @@ export default function Cart() {
                     Total
                   </span>
                   <span className="text-2xl font-bold text-blue-600">
-                    ₹{finalTotal.toLocaleString("en-IN")}
+                    ${finalTotal.toLocaleString("en-US")}
                   </span>
                 </div>
 
                 {shippingCost > 0 && (
                   <p className="text-sm text-gray-500">
-                    Free shipping on orders over ₹500
+                    Free shipping on orders over $50
                   </p>
                 )}
               </div>
