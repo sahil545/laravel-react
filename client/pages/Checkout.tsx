@@ -278,7 +278,24 @@ export default function Checkout() {
 
                 <StripePaymentForm
                   amount={total}
+                  onSubmit={(e) => {
+                    if (
+                      !formData.firstName ||
+                      !formData.lastName ||
+                      !formData.email ||
+                      !formData.phone ||
+                      !formData.address ||
+                      !formData.city ||
+                      !formData.state ||
+                      !formData.postalCode
+                    ) {
+                      toast.error("Please fill in all shipping information first");
+                      return false;
+                    }
+                    return true;
+                  }}
                   onPaymentSuccess={(paymentIntentId) => {
+                    clearCart();
                     toast.success("Payment processed successfully!");
                     setOrderPlaced(true);
                   }}
