@@ -11,6 +11,7 @@ import {
   getProductImageUrl,
 } from "@/lib/api";
 import { Link } from "react-router-dom";
+import ColorSwatch from "@/components/ColorSwatch";
 
 const PRODUCTS_PER_PAGE = 12;
 
