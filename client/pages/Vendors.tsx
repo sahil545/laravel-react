@@ -141,15 +141,23 @@ export default function Vendors() {
                   <div className="bg-white rounded-xl border border-gray-200 hover:border-blue-400 hover:shadow-xl transition-all duration-300 overflow-hidden">
                     <div className="flex flex-col md:flex-row">
                       {/* Left: Vendor Avatar/Image Area */}
-                      <div className="md:w-48 md:h-48 flex-shrink-0 bg-gradient-to-br from-blue-500 to-purple-600 p-8 flex items-center justify-center text-center">
-                        <div className="flex flex-col items-center gap-3">
-                          <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                            <ShoppingBag className="w-12 h-12 text-blue-600" />
+                      <div className="md:w-48 md:h-48 flex-shrink-0 bg-gradient-to-br from-blue-500 to-purple-600 p-8 flex items-center justify-center text-center overflow-hidden">
+                        {vendor.photo ? (
+                          <img
+                            src={vendor.photo}
+                            alt={vendor.shop_name || vendor.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <div className="flex flex-col items-center gap-3">
+                            <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                              <ShoppingBag className="w-12 h-12 text-blue-600" />
+                            </div>
+                            <p className="text-white font-semibold text-sm">
+                              {vendor.shop_name || vendor.name}
+                            </p>
                           </div>
-                          <p className="text-white font-semibold text-sm">
-                            {vendor.shop_name || vendor.name}
-                          </p>
-                        </div>
+                        )}
                       </div>
 
                       {/* Right: Vendor Content */}
