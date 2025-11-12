@@ -41,6 +41,7 @@ export default function StripePaymentForm({
   onPaymentSuccess,
   onPaymentError,
   isProcessing = false,
+  onSubmit,
 }: StripePaymentFormProps) {
   const stripe = useStripe();
   const elements = useElements();
