@@ -12,6 +12,7 @@ import {
   Package,
 } from "lucide-react";
 import { getProductImageUrl } from "@/lib/api";
+import ColorSwatch from "@/components/ColorSwatch";
 
 export default function Cart() {
   const { cart, removeFromCart, updateQuantity } = useCart();
