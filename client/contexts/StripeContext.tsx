@@ -1,9 +1,5 @@
 import { loadStripe, Stripe } from "@stripe/js";
-import {
-  Elements,
-  ElementsConsumer,
-  StripeProvider,
-} from "@stripe/react-stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 import { ReactNode, useMemo } from "react";
 
 // Test publishable key - replace with your live key later
@@ -20,16 +16,12 @@ function getStripe() {
   return stripePromise;
 }
 
-interface StripeContextProviderProps {
+interface StripeProviderProps {
   children: ReactNode;
 }
 
-export function StripeContextProvider({ children }: StripeContextProviderProps) {
+export function StripeProvider({ children }: StripeProviderProps) {
   const stripe = useMemo(() => getStripe(), []);
 
-  return (
-    <StripeProvider stripe={stripe}>
-      <Elements stripe={stripe}>{children}</Elements>
-    </StripeProvider>
-  );
+  return <Elements stripe={stripe}>{children}</Elements>;
 }
