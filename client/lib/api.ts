@@ -45,7 +45,8 @@ export async function getVendors(): Promise<Vendor[]> {
     const data = await response.json();
 
     if (data.status && Array.isArray(data.data)) {
-      return data.data;
+      // Filter to only include vendors with role="vendor"
+      return data.data.filter((vendor: Vendor) => vendor.role === "vendor");
     }
     return [];
   } catch (error) {
