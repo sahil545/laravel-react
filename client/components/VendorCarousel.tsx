@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ShoppingBag } from "lucide-react";
 import { Vendor, getVendors } from "@/lib/api";
 import { Link } from "react-router-dom";
 
@@ -65,13 +65,22 @@ export default function VendorCarousel() {
                     <Link
                       key={vendor.id}
                       to={`/vendor/${vendor.id}`}
-                      className="bg-white rounded-lg p-6 flex items-center justify-center h-[120px] hover:shadow-lg transition-shadow cursor-pointer"
+                      className="bg-white rounded-lg overflow-hidden h-[120px] hover:shadow-lg transition-shadow cursor-pointer flex flex-col items-center justify-center"
                     >
-                      <div className="text-center">
-                        <p className="text-sm font-semibold text-[#070418] truncate">
-                          {vendor.shop_name || vendor.name}
-                        </p>
-                      </div>
+                      {vendor.photo ? (
+                        <img
+                          src={vendor.photo}
+                          alt={vendor.shop_name || vendor.name}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="flex flex-col items-center justify-center h-full w-full gap-2 bg-gradient-to-br from-blue-50 to-purple-50">
+                          <ShoppingBag className="w-6 h-6 text-blue-600" />
+                          <p className="text-xs font-semibold text-[#070418] truncate px-2">
+                            {vendor.shop_name || vendor.name}
+                          </p>
+                        </div>
+                      )}
                     </Link>
                   ))}
                 </div>
