@@ -287,69 +287,16 @@ export default function Checkout() {
                   Payment Information
                 </h2>
 
-                <input
-                  type="text"
-                  name="cardNumber"
-                  placeholder="Card Number (16 digits)"
-                  value={formData.cardNumber}
-                  onChange={(e) => {
-                    const value = e.target.value.replace(/\s/g, "");
-                    if (value.length <= 16) {
-                      const formatted = value.replace(/(\d{4})/g, "$1 ").trim();
-                      setFormData((prev) => ({
-                        ...prev,
-                        cardNumber: formatted,
-                      }));
-                    }
+                <StripePaymentForm
+                  amount={total}
+                  onPaymentSuccess={(paymentIntentId) => {
+                    toast.success("Payment processed successfully!");
+                    setOrderPlaced(true);
                   }}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 mb-4 font-mono"
-                  placeholder="1234 5678 9012 3456"
-                  required
+                  onPaymentError={(error) => {
+                    toast.error("Payment failed: " + error);
+                  }}
                 />
-
-                <div className="grid grid-cols-2 gap-4">
-                  <input
-                    type="text"
-                    name="expiryDate"
-                    placeholder="MM/YY"
-                    value={formData.expiryDate}
-                    onChange={(e) => {
-                      let value = e.target.value.replace(/\D/g, "");
-                      if (value.length >= 2) {
-                        value = value.slice(0, 2) + "/" + value.slice(2, 4);
-                      }
-                      setFormData((prev) => ({
-                        ...prev,
-                        expiryDate: value,
-                      }));
-                    }}
-                    className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-                    maxLength={5}
-                    required
-                  />
-                  <input
-                    type="text"
-                    name="cvv"
-                    placeholder="CVV"
-                    value={formData.cvv}
-                    onChange={(e) => {
-                      const value = e.target.value.replace(/\D/g, "");
-                      if (value.length <= 3) {
-                        setFormData((prev) => ({
-                          ...prev,
-                          cvv: value,
-                        }));
-                      }
-                    }}
-                    className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-                    maxLength={3}
-                    required
-                  />
-                </div>
-
-                <p className="text-sm text-gray-500 mt-4">
-                  Your payment information is secure and encrypted.
-                </p>
               </div>
 
               {/* Submit Button */}
