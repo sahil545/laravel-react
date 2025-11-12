@@ -12,6 +12,7 @@ import {
 import { useCart } from "@/hooks/use-cart";
 import { ChevronLeft, ShoppingCart, Plus, Minus } from "lucide-react";
 import SimilarProductsCarousel from "@/components/SimilarProductsCarousel";
+import ColorSwatch from "@/components/ColorSwatch";
 import { toast } from "sonner";
 
 export default function ProductDetail() {
