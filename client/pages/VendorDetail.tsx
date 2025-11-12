@@ -159,27 +159,35 @@ export default function VendorDetail() {
             </div>
 
             {/* Contact Information */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="flex items-start gap-3">
-                <Mail className="w-5 h-5 text-gray-400 mt-1 flex-shrink-0" />
-                <div>
-                  <p className="text-sm text-gray-600 mb-1">Email</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="flex gap-4">
+                <div className="pt-1 flex-shrink-0">
+                  <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
+                    <Mail className="w-5 h-5 text-blue-600" />
+                  </div>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm text-gray-600 mb-2 font-semibold">Email</p>
                   <a
                     href={`mailto:${vendor.email}`}
-                    className="text-blue-600 hover:text-blue-700 font-medium break-all"
+                    className="text-blue-600 hover:text-blue-700 font-medium text-sm break-all"
                   >
                     {vendor.email}
                   </a>
                 </div>
               </div>
               {vendor.phone_number && (
-                <div className="flex items-start gap-3">
-                  <Phone className="w-5 h-5 text-gray-400 mt-1 flex-shrink-0" />
-                  <div>
-                    <p className="text-sm text-gray-600 mb-1">Phone</p>
+                <div className="flex gap-4">
+                  <div className="pt-1 flex-shrink-0">
+                    <div className="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center">
+                      <Phone className="w-5 h-5 text-green-600" />
+                    </div>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm text-gray-600 mb-2 font-semibold">Phone</p>
                     <a
                       href={`tel:${vendor.phone_number}`}
-                      className="text-blue-600 hover:text-blue-700 font-medium"
+                      className="text-blue-600 hover:text-blue-700 font-medium text-sm"
                     >
                       {vendor.phone_number}
                     </a>
@@ -187,11 +195,15 @@ export default function VendorDetail() {
                 </div>
               )}
               {vendor.address && (
-                <div className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-gray-400 mt-1 flex-shrink-0" />
-                  <div>
-                    <p className="text-sm text-gray-600 mb-1">Location</p>
-                    <p className="text-gray-900 font-medium">{vendor.address}</p>
+                <div className="flex gap-4">
+                  <div className="pt-1 flex-shrink-0">
+                    <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center">
+                      <MapPin className="w-5 h-5 text-purple-600" />
+                    </div>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm text-gray-600 mb-2 font-semibold">Location</p>
+                    <p className="text-gray-900 font-medium text-sm">{vendor.address}</p>
                   </div>
                 </div>
               )}
