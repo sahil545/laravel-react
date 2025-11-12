@@ -19,6 +19,7 @@ import {
   Star,
   Shield,
 } from "lucide-react";
+import ColorSwatch from "@/components/ColorSwatch";
 
 export default function VendorDetail() {
   const { vendor_id } = useParams<{ vendor_id: string }>();
