@@ -1,4 +1,5 @@
 import { ChevronDown } from "lucide-react";
+import ColorSwatch from "./ColorSwatch";
 
 interface Product {
   image: string;
