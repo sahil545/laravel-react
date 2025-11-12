@@ -34,15 +34,15 @@ export default function VendorDetail() {
   const fetchData = async () => {
     setLoading(true);
 
-    const vendorShopId = parseInt(vendor_id || "0", 10);
+    const vendorId = parseInt(vendor_id || "0", 10);
 
     const vendors = await getVendors();
-    const foundVendor = vendors.find((v) => v.vendor_id === vendorShopId);
+    const foundVendor = vendors.find((v) => v.id === vendorId);
     setVendor(foundVendor || null);
 
     const allProducts = await getProducts();
     const vendorProducts = allProducts.filter(
-      (p) => p.vendor_id === vendorShopId,
+      (p) => p.vendor_id === foundVendor?.vendor_id,
     );
     setProducts(vendorProducts);
 
