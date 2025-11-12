@@ -223,16 +223,12 @@ export default function ProductDetail() {
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">
                   Available Colors
                 </h3>
-                <div className="flex flex-wrap gap-2">
-                  {colors.map((color, index) => (
-                    <div
-                      key={index}
-                      className="px-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-700 hover:border-[#070418] cursor-pointer transition-colors"
-                    >
-                      {color}
-                    </div>
-                  ))}
-                </div>
+                <ColorSwatch
+                  colors={colors}
+                  selectedColor={selectedColor}
+                  onColorSelect={setSelectedColor}
+                  size="lg"
+                />
               </div>
             )}
 
