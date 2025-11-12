@@ -24,7 +24,7 @@ export interface Category {
   id: number;
   category_name: string;
   category_slug: string;
-  category_thumbnail?: string;
+  category_image?: string;
   category_description?: string;
 }
 

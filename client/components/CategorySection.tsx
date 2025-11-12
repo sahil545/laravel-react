@@ -58,9 +58,9 @@ export default function CategorySection() {
             {categories.map((category, index) => (
               <div key={category.id || category.category_slug || index} className="relative group cursor-pointer overflow-hidden rounded-[20px]">
                 <div className="relative w-full aspect-square bg-gray-200">
-                  {category.category_thumbnail && (
+                  {category.category_image && (
                     <img
-                      src={category.category_thumbnail}
+                      src={category.category_image}
                       alt={category.category_name}
                       className="w-full h-full object-cover"
                     />
