@@ -21,7 +21,7 @@ interface CheckoutFormData {
 }
 
 export default function Checkout() {
-  const { cart } = useCart();
+  const { cart, clearCart } = useCart();
   const navigate = useNavigate();
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [formData, setFormData] = useState<CheckoutFormData>({
