@@ -51,6 +51,14 @@ export default function StripePaymentForm({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Validate parent form first if callback provided
+    if (onSubmit) {
+      const isValid = onSubmit(e);
+      if (!isValid) {
+        return;
+      }
+    }
+
     if (!stripe || !elements) {
       setError("Stripe is not loaded. Please try again.");
       return;
