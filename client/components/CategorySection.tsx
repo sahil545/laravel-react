@@ -55,8 +55,8 @@ export default function CategorySection() {
         )}
         {!loading && !error && categories.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            {categories.map((category) => (
-              <div key={category.id} className="relative group cursor-pointer overflow-hidden rounded-[20px]">
+            {categories.map((category, index) => (
+              <div key={category.id || category.category_slug || index} className="relative group cursor-pointer overflow-hidden rounded-[20px]">
                 <div className="relative w-full aspect-square bg-gray-200">
                   {category.category_thumbnail && (
                     <img
