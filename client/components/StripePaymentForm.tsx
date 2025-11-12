@@ -9,23 +9,12 @@ interface StripePaymentFormProps {
   onSubmit?: (e: React.FormEvent) => boolean;
 }
 
-const cardElementOptions: StripeCardElementOptions = {
-  style: {
-    base: {
-      fontSize: "16px",
-      color: "#424770",
-      "::placeholder": {
-        color: "#9ca3af",
-      },
-      fontFamily: "system-ui, -apple-system, sans-serif",
-      fontSmoothing: "antialiased",
-    },
-    invalid: {
-      color: "#fa755a",
-      iconColor: "#fa755a",
-    },
-  },
-};
+interface PaymentFormData {
+  cardNumber: string;
+  expiryDate: string;
+  cvv: string;
+  cardholderName: string;
+}
 
 export default function StripePaymentForm({
   amount,
@@ -34,10 +23,35 @@ export default function StripePaymentForm({
   isProcessing = false,
   onSubmit,
 }: StripePaymentFormProps) {
-  const stripe = useStripe();
-  const elements = useElements();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [formData, setFormData] = useState<PaymentFormData>({
+    cardNumber: "",
+    expiryDate: "",
+    cvv: "",
+    cardholderName: "",
+  });
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: keyof PaymentFormData
+  ) => {
+    let value = e.target.value;
+
+    if (field === "cardNumber") {
+      value = value.replace(/\s/g, "").slice(0, 16);
+      value = value.replace(/(\d{4})/g, "$1 ").trim();
+    } else if (field === "expiryDate") {
+      value = value.replace(/\D/g, "").slice(0, 4);
+      if (value.length >= 2) {
+        value = value.slice(0, 2) + "/" + value.slice(2);
+      }
+    } else if (field === "cvv") {
+      value = value.replace(/\D/g, "").slice(0, 3);
+    }
+
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,55 +64,43 @@ export default function StripePaymentForm({
       }
     }
 
-    if (!stripe || !elements) {
-      setError("Stripe is not loaded. Please try again.");
+    setError(null);
+
+    // Basic validation
+    if (!formData.cardholderName) {
+      setError("Cardholder name is required");
+      return;
+    }
+
+    if (formData.cardNumber.replace(/\s/g, "").length !== 16) {
+      setError("Please enter a valid 16-digit card number");
+      return;
+    }
+
+    if (!formData.expiryDate || formData.expiryDate.length !== 5) {
+      setError("Please enter a valid expiry date (MM/YY)");
+      return;
+    }
+
+    if (formData.cvv.length !== 3) {
+      setError("Please enter a valid 3-digit CVV");
       return;
     }
 
     setLoading(true);
-    setError(null);
 
     try {
-      const cardElement = elements.getElement(CardElement);
-
-      if (!cardElement) {
-        setError("Card element not found");
-        setLoading(false);
-        return;
-      }
-
-      // Create payment method
-      const { error: paymentMethodError, paymentMethod } =
-        await stripe.createPaymentMethod({
-          type: "card",
-          card: cardElement,
-          billing_details: {
-            name: "Customer Name",
-          },
-        });
-
-      if (paymentMethodError) {
-        setError(paymentMethodError.message || "Payment failed");
-        setLoading(false);
-        onPaymentError(paymentMethodError.message || "Payment failed");
-        return;
-      }
-
-      // In a real app, you would send the paymentMethod.id to your backend
-      // to create a payment intent and process the payment
-      // For now, we'll simulate a successful payment
-      console.log("Payment Method:", paymentMethod);
+      // Simulate payment processing
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
       // Simulate successful payment
-      setTimeout(() => {
-        setLoading(false);
-        onPaymentSuccess(paymentMethod?.id || "test_payment_intent");
-      }, 1000);
+      onPaymentSuccess("test_payment_intent_" + Date.now());
     } catch (err) {
       const errorMessage =
         err instanceof Error ? err.message : "An error occurred";
       setError(errorMessage);
       onPaymentError(errorMessage);
+    } finally {
       setLoading(false);
     }
   };
