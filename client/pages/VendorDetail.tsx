@@ -83,46 +83,118 @@ export default function VendorDetail() {
         {/* Back Button */}
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-blue-500 hover:text-blue-700 mb-8"
+          className="inline-flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors mb-8 font-medium"
         >
           <ChevronLeft className="w-5 h-5" />
           Back to Home
         </Link>
 
-        {/* Vendor Info */}
-        <div className="bg-gradient-to-r from-[#070418] to-[#1a1627] rounded-lg p-8 text-white mb-12">
-          <h1 className="text-4xl font-bold mb-2">
-            {vendor.shop_name || vendor.name}
-          </h1>
-          <p className="text-lg text-gray-400 mb-4">Owner: {vendor.name}</p>
+        {/* Vendor Header Section */}
+        <div className="bg-white rounded-xl border border-gray-200 mb-12 overflow-hidden">
+          {/* Hero Background */}
+          <div className="h-32 bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700"></div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <p className="text-gray-300 mb-2">
-                <span className="font-semibold">Email:</span> {vendor.email}
-              </p>
-              {vendor.phone_number && (
-                <p className="text-gray-300 mb-2">
-                  <span className="font-semibold">Phone:</span>{" "}
-                  {vendor.phone_number}
+          {/* Vendor Info Container */}
+          <div className="px-8 pb-8 -mt-16 relative z-10">
+            {/* Vendor Avatar Placeholder */}
+            <div className="flex items-end gap-6 mb-6">
+              <div className="w-32 h-32 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl border-4 border-white shadow-lg flex items-center justify-center">
+                <span className="text-4xl font-bold text-white">
+                  {(vendor.shop_name || vendor.name).charAt(0).toUpperCase()}
+                </span>
+              </div>
+              <div className="flex-1 pb-2">
+                <h1 className="text-4xl font-bold text-gray-900 mb-1">
+                  {vendor.shop_name || vendor.name}
+                </h1>
+                <p className="text-lg text-gray-600">
+                  Operated by {vendor.name}
                 </p>
+              </div>
+            </div>
+
+            {/* Vendor Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8 pt-6 border-t border-gray-200">
+              <div className="flex items-center gap-3">
+                <div className="p-3 bg-blue-100 rounded-lg">
+                  <Shield className="w-6 h-6 text-blue-600" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600">Status</p>
+                  <p className="font-semibold text-gray-900">Active Vendor</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="p-3 bg-green-100 rounded-lg">
+                  <Package className="w-6 h-6 text-green-600" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600">Products</p>
+                  <p className="font-semibold text-gray-900">{products.length}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="p-3 bg-purple-100 rounded-lg">
+                  <Calendar className="w-6 h-6 text-purple-600" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600">Member Since</p>
+                  <p className="font-semibold text-gray-900">
+                    {new Date(vendor.created_at).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                    })}
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="p-3 bg-yellow-100 rounded-lg">
+                  <Star className="w-6 h-6 text-yellow-600" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600">Rating</p>
+                  <p className="font-semibold text-gray-900">Trusted</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Contact Information */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="flex items-start gap-3">
+                <Mail className="w-5 h-5 text-gray-400 mt-1 flex-shrink-0" />
+                <div>
+                  <p className="text-sm text-gray-600 mb-1">Email</p>
+                  <a
+                    href={`mailto:${vendor.email}`}
+                    className="text-blue-600 hover:text-blue-700 font-medium break-all"
+                  >
+                    {vendor.email}
+                  </a>
+                </div>
+              </div>
+              {vendor.phone_number && (
+                <div className="flex items-start gap-3">
+                  <Phone className="w-5 h-5 text-gray-400 mt-1 flex-shrink-0" />
+                  <div>
+                    <p className="text-sm text-gray-600 mb-1">Phone</p>
+                    <a
+                      href={`tel:${vendor.phone_number}`}
+                      className="text-blue-600 hover:text-blue-700 font-medium"
+                    >
+                      {vendor.phone_number}
+                    </a>
+                  </div>
+                </div>
               )}
               {vendor.address && (
-                <p className="text-gray-300 mb-2">
-                  <span className="font-semibold">Address:</span>{" "}
-                  {vendor.address}
-                </p>
+                <div className="flex items-start gap-3">
+                  <MapPin className="w-5 h-5 text-gray-400 mt-1 flex-shrink-0" />
+                  <div>
+                    <p className="text-sm text-gray-600 mb-1">Location</p>
+                    <p className="text-gray-900 font-medium">{vendor.address}</p>
+                  </div>
+                </div>
               )}
-              <p className="text-gray-300 mb-2">
-                <span className="font-semibold">Username:</span>{" "}
-                {vendor.username}
-              </p>
-            </div>
-            <div>
-              <p className="text-gray-300">
-                <span className="font-semibold">Member Since:</span>{" "}
-                {new Date(vendor.created_at).toLocaleDateString()}
-              </p>
             </div>
           </div>
         </div>
