@@ -82,15 +82,15 @@ export default function ProductGrid({ title, products }: ProductGridProps) {
                 </p>
                 
                 {/* Colors */}
-                <div className="flex items-center gap-2 pt-1">
-                  {product.colors.map((color, colorIndex) => (
-                    <div
-                      key={colorIndex}
-                      className="w-6 h-6 rounded-full border border-gray-200"
-                      style={{ backgroundColor: color }}
+                {product.colors && product.colors.length > 0 && (
+                  <div className="pt-2">
+                    <ColorSwatch
+                      colors={product.colors}
+                      onColorSelect={() => {}}
+                      size="sm"
                     />
-                  ))}
-                </div>
+                  </div>
+                )}
               </div>
 
               {/* Price */}
