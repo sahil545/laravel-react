@@ -1,21 +1,28 @@
+import { useState, useEffect } from 'react';
+import { getCategories, Category } from '../lib/api';
+
 export default function CategorySection() {
-  const categories = [
-    {
-      image: "https://api.builder.io/api/v1/image/assets/TEMP/c4d7ef44968b587260db4ba0980dc126336283c9?width=1156",
-      title: "Men's",
-      subtitle: "Sale off 20%",
-    },
-    {
-      image: "https://api.builder.io/api/v1/image/assets/TEMP/883b77f2d7a232d16f886c8db14a71d9f20d6c78?width=1156",
-      title: "Women's",
-      subtitle: "Sale from 10%",
-    },
-    {
-      image: "https://api.builder.io/api/v1/image/assets/TEMP/5137eb7e88bec483113dc7bc910159836e838840?width=1156",
-      title: "Kid's",
-      subtitle: "Sale up to 40%",
-    },
-  ];
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const data = await getCategories();
+        setCategories(data.slice(0, 3));
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to fetch categories');
+        setCategories([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   return (
     <section className="w-full py-12 md:py-16">
@@ -32,25 +39,39 @@ export default function CategorySection() {
 
         {/* Categories Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-          {categories.map((category, index) => (
-            <div key={index} className="relative group cursor-pointer overflow-hidden rounded-[20px]">
-              <div className="relative w-full aspect-square">
-                <img 
-                  src={category.image}
-                  alt={category.title}
-                  className="w-full h-full object-cover"
-                />
+          {loading && (
+            <div className="col-span-full text-center py-8">
+              <p className="text-gray-600">Loading categories...</p>
+            </div>
+          )}
+          {error && (
+            <div className="col-span-full text-center py-8">
+              <p className="text-red-600">{error}</p>
+            </div>
+          )}
+          {!loading && !error && categories.length === 0 && (
+            <div className="col-span-full text-center py-8">
+              <p className="text-gray-600">No categories available</p>
+            </div>
+          )}
+          {categories.map((category) => (
+            <div key={category.id} className="relative group cursor-pointer overflow-hidden rounded-[20px]">
+              <div className="relative w-full aspect-square bg-gray-200">
+                {category.category_thumbnail && (
+                  <img
+                    src={category.category_thumbnail}
+                    alt={category.category_name}
+                    className="w-full h-full object-cover"
+                  />
+                )}
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                
+
                 {/* Content */}
                 <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 lg:p-8 text-center">
                   <h3 className="font-inter font-bold text-white text-[28px] md:text-[36px] lg:text-[41px] leading-[40px] md:leading-[58px] mb-1">
-                    {category.title}
+                    {category.category_name}
                   </h3>
-                  <p className="font-inter font-semibold text-white text-[14px] md:text-[16px] lg:text-[18px] tracking-[1.28px] uppercase">
-                    {category.subtitle}
-                  </p>
                 </div>
               </div>
             </div>
