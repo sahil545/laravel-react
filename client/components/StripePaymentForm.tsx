@@ -15,6 +15,7 @@ interface StripePaymentFormProps {
   onPaymentSuccess: (paymentIntentId: string) => void;
   onPaymentError: (error: string) => void;
   isProcessing?: boolean;
+  onSubmit?: (e: React.FormEvent) => boolean;
 }
 
 const cardElementOptions: StripeCardElementOptions = {
