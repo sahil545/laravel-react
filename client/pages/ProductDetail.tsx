@@ -178,7 +178,7 @@ export default function ProductDetail() {
                 <p className="text-lg text-gray-600">
                   By{" "}
                   <Link
-                    to={`/vendor/${vendor.vendor_id}`}
+                    to={`/vendor/${vendor.id}`}
                     className="text-blue-600 hover:text-blue-700 font-semibold"
                   >
                     {vendor.shop_name || vendor.name}
