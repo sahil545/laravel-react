@@ -53,7 +53,8 @@ export default function ProductDetail() {
   const handleAddToCart = () => {
     if (!product) return;
 
-    const colors = product.product_colors?.split(",").map((c) => c.trim()) || [];
+    const colors =
+      product.product_colors?.split(",").map((c) => c.trim()) || [];
     if (colors.length > 0 && !selectedColor) {
       toast.error("Please select a color", {
         description: "Color selection is required for this product",

@@ -131,7 +131,9 @@ export default function VendorDetail() {
                 </div>
                 <div>
                   <p className="text-sm text-gray-600">Products</p>
-                  <p className="font-semibold text-gray-900">{products.length}</p>
+                  <p className="font-semibold text-gray-900">
+                    {products.length}
+                  </p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
@@ -168,7 +170,9 @@ export default function VendorDetail() {
                   </div>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm text-gray-600 mb-2 font-semibold">Email</p>
+                  <p className="text-sm text-gray-600 mb-2 font-semibold">
+                    Email
+                  </p>
                   <a
                     href={`mailto:${vendor.email}`}
                     className="text-blue-600 hover:text-blue-700 font-medium text-sm break-all"
@@ -185,7 +189,9 @@ export default function VendorDetail() {
                     </div>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm text-gray-600 mb-2 font-semibold">Phone</p>
+                    <p className="text-sm text-gray-600 mb-2 font-semibold">
+                      Phone
+                    </p>
                     <a
                       href={`tel:${vendor.phone_number}`}
                       className="text-blue-600 hover:text-blue-700 font-medium text-sm"
@@ -203,8 +209,12 @@ export default function VendorDetail() {
                     </div>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm text-gray-600 mb-2 font-semibold">Location</p>
-                    <p className="text-gray-900 font-medium text-sm">{vendor.address}</p>
+                    <p className="text-sm text-gray-600 mb-2 font-semibold">
+                      Location
+                    </p>
+                    <p className="text-gray-900 font-medium text-sm">
+                      {vendor.address}
+                    </p>
                   </div>
                 </div>
               )}
@@ -252,7 +262,9 @@ export default function VendorDetail() {
                     />
                     {/* Stock Badge */}
                     <div className="absolute top-3 right-3 bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                      {product.product_quantity > 0 ? "In Stock" : "Out of Stock"}
+                      {product.product_quantity > 0
+                        ? "In Stock"
+                        : "Out of Stock"}
                     </div>
                   </div>
 
@@ -290,7 +302,9 @@ export default function VendorDetail() {
                           </p>
                         </div>
                         <div className="text-right">
-                          <p className="text-xs text-gray-500 mb-1">Available</p>
+                          <p className="text-xs text-gray-500 mb-1">
+                            Available
+                          </p>
                           <p className="text-lg font-semibold text-gray-900">
                             {product.product_quantity}
                           </p>

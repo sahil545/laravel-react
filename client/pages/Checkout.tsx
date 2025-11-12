@@ -289,7 +289,9 @@ export default function Checkout() {
                       !formData.state ||
                       !formData.postalCode
                     ) {
-                      toast.error("Please fill in all shipping information first");
+                      toast.error(
+                        "Please fill in all shipping information first",
+                      );
                       return false;
                     }
                     return true;
@@ -304,7 +306,6 @@ export default function Checkout() {
                   }}
                 />
               </div>
-
             </form>
           </div>
 

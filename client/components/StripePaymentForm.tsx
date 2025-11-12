@@ -34,7 +34,7 @@ export default function StripePaymentForm({
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
-    field: keyof PaymentFormData
+    field: keyof PaymentFormData,
   ) => {
     let value = e.target.value;
 
@@ -216,7 +216,8 @@ export default function StripePaymentForm({
             <strong>CVV:</strong> 123 (or any 3 digits)
           </p>
           <p className="mt-2 text-blue-600">
-            ℹ️ This is a test environment. Use any future expiry date for testing.
+            ℹ️ This is a test environment. Use any future expiry date for
+            testing.
           </p>
         </div>
       </div>

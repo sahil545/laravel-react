@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { getCategories, Category } from '../lib/api';
+import { useState, useEffect } from "react";
+import { getCategories, Category } from "../lib/api";
 
 export default function CategorySection() {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -14,7 +14,9 @@ export default function CategorySection() {
         const data = await getCategories();
         setCategories(data.slice(0, 3));
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to fetch categories');
+        setError(
+          err instanceof Error ? err.message : "Failed to fetch categories",
+        );
         setCategories([]);
       } finally {
         setLoading(false);
@@ -32,8 +34,15 @@ export default function CategorySection() {
           <h2 className="font-mirza font-bold text-[48px] leading-[58px]">
             Top Categories
           </h2>
-          <svg className="absolute -top-1 left-[180px] w-[134px] h-[32px]" viewBox="0 0 134 32" fill="none">
-            <path d="M60.5161 3.64148C47.0681 7.61074 16.1376 18.2972 0 29.289C40.8244 34.1742 124.778 35.884 134 3.64148C121.032 0.893534 88.1806 -2.95359 60.5161 3.64148Z" fill="#EBD96B"/>
+          <svg
+            className="absolute -top-1 left-[180px] w-[134px] h-[32px]"
+            viewBox="0 0 134 32"
+            fill="none"
+          >
+            <path
+              d="M60.5161 3.64148C47.0681 7.61074 16.1376 18.2972 0 29.289C40.8244 34.1742 124.778 35.884 134 3.64148C121.032 0.893534 88.1806 -2.95359 60.5161 3.64148Z"
+              fill="#EBD96B"
+            />
           </svg>
         </div>
 
@@ -56,7 +65,10 @@ export default function CategorySection() {
         {!loading && !error && categories.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {categories.map((category, index) => (
-              <div key={category.id || category.category_slug || index} className="relative group cursor-pointer overflow-hidden rounded-[20px]">
+              <div
+                key={category.id || category.category_slug || index}
+                className="relative group cursor-pointer overflow-hidden rounded-[20px]"
+              >
                 <div className="relative w-full aspect-square bg-gray-200">
                   {category.category_image && (
                     <img

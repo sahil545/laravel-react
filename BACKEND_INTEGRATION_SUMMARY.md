@@ -42,6 +42,7 @@ Copy the migration code from `LARAVEL_BACKEND_SETUP.md` into the generated files
 ### Step 2: Create Laravel Models
 
 Create these model files in `app/Models/`:
+
 - `Order.php`
 - `OrderItem.php`
 - `Payment.php`
@@ -52,6 +53,7 @@ Copy the code from `LARAVEL_BACKEND_SETUP.md`.
 ### Step 3: Create Laravel Controllers
 
 Create these controller files in `app/Http/Controllers/`:
+
 - `OrderController.php`
 - `PaymentController.php`
 - `InvoiceController.php`
@@ -65,6 +67,7 @@ Update `routes/api.php` with the routes from `LARAVEL_BACKEND_SETUP.md`.
 ### Step 5: Configure Environment
 
 **Laravel .env:**
+
 ```env
 APP_URL=https://your-laravel-backend.com
 DB_CONNECTION=mysql
@@ -76,6 +79,7 @@ DB_PASSWORD=your_password
 ```
 
 **React .env:**
+
 ```env
 VITE_BACKEND_URL=https://your-laravel-backend.com/api
 ```
@@ -85,6 +89,7 @@ VITE_BACKEND_URL=https://your-laravel-backend.com/api
 If your frontend and backend are on different domains, enable CORS:
 
 **Laravel config/cors.php:**
+
 ```php
 'allowed_origins' => [
     'https://your-frontend-domain.com',
@@ -101,11 +106,7 @@ If your frontend and backend are on different domains, enable CORS:
 In `client/pages/Checkout.tsx`, import and use the order API:
 
 ```typescript
-import {
-  createOrder,
-  recordPayment,
-  generateInvoice,
-} from "@/lib/orderApi";
+import { createOrder, recordPayment, generateInvoice } from "@/lib/orderApi";
 import { toast } from "sonner";
 
 // In your payment success handler:
@@ -126,7 +127,7 @@ const handlePaymentSuccess = async (paymentIntentId: string) => {
       shipping_cost: shippingCost,
       discount_amount: discount,
       total_amount: finalTotal,
-      items: cart.map(item => ({
+      items: cart.map((item) => ({
         product_id: item.product_id,
         product_name: item.product_name,
         unit_price: item.product_price,
@@ -139,7 +140,7 @@ const handlePaymentSuccess = async (paymentIntentId: string) => {
     // 2. Record payment
     await recordPayment({
       order_id: orderResponse.order.id,
-      payment_method: 'stripe',
+      payment_method: "stripe",
       amount: finalTotal,
       transaction_id: paymentIntentId,
     });
@@ -149,7 +150,7 @@ const handlePaymentSuccess = async (paymentIntentId: string) => {
 
     // Clear cart and show success
     clearCart();
-    toast.success('Order placed successfully!');
+    toast.success("Order placed successfully!");
     setOrderPlaced(true);
   } catch (error) {
     toast.error(error.message);
@@ -160,6 +161,7 @@ const handlePaymentSuccess = async (paymentIntentId: string) => {
 ## Database Schema Overview
 
 ### orders table
+
 ```
 id, order_number, user_id, customer_email, customer_phone,
 shipping_first_name, shipping_last_name, shipping_address,
@@ -169,12 +171,14 @@ promo_code, status, notes, created_at, updated_at
 ```
 
 ### order_items table
+
 ```
 id, order_id, product_id, product_name, unit_price,
 quantity, total_price, selected_color, created_at, updated_at
 ```
 
 ### payments table
+
 ```
 id, order_id, payment_method, amount, status,
 transaction_id, gateway_response, card_last_four,
@@ -182,6 +186,7 @@ card_brand, notes, processed_at, created_at, updated_at
 ```
 
 ### invoices table
+
 ```
 id, order_id, invoice_number, invoice_data,
 status, invoice_date, due_date, sent_at,
@@ -191,22 +196,26 @@ viewed_at, paid_at, pdf_path, created_at, updated_at
 ## API Endpoints
 
 ### Orders
+
 - `POST /api/orders` - Create new order
 - `GET /api/orders` - Get all orders (paginated)
 - `GET /api/orders/{id}` - Get order details
 - `PUT /api/orders/{id}` - Update order status
 
 ### Payments
+
 - `POST /api/payments` - Record payment
 - `GET /api/orders/{id}/payments` - Get order payments
 
 ### Invoices
+
 - `GET /api/orders/{id}/invoice` - Generate invoice
 - `GET /api/invoices/{id}` - Get invoice details
 
 ## Testing with Postman
 
 **Test Order Creation:**
+
 ```
 POST http://localhost:8000/api/orders
 Content-Type: application/json
@@ -243,6 +252,7 @@ Content-Type: application/json
 Once data is in the database, your admin panel can display:
 
 ### Orders Management
+
 ```sql
 -- Get all orders
 SELECT * FROM orders ORDER BY created_at DESC;
@@ -265,6 +275,7 @@ SELECT SUM(total_amount) as total_revenue FROM orders WHERE status = 'delivered'
 ```
 
 ### Payment Tracking
+
 ```sql
 -- Get all payments
 SELECT * FROM payments ORDER BY created_at DESC;
@@ -279,6 +290,7 @@ GROUP BY payment_method;
 ```
 
 ### Invoice Management
+
 ```sql
 -- Get unpaid invoices
 SELECT * FROM invoices WHERE status != 'paid' ORDER BY due_date ASC;
@@ -303,18 +315,23 @@ SELECT status, COUNT(*) as count FROM invoices GROUP BY status;
 ## Common Issues & Solutions
 
 ### Issue: CORS errors
+
 **Solution:** Configure `config/cors.php` to allow your frontend domain
 
 ### Issue: 404 errors on API endpoints
+
 **Solution:** Make sure routes are registered in `routes/api.php`
 
 ### Issue: Database connection errors
+
 **Solution:** Check `.env` file database credentials and ensure MySQL is running
 
 ### Issue: Payment not recording
+
 **Solution:** Ensure `payments` table and `Payment` model exist
 
 ### Issue: Orders not showing in admin
+
 **Solution:** Run migrations: `php artisan migrate`
 
 ## Next Steps
@@ -333,6 +350,7 @@ SELECT status, COUNT(*) as count FROM invoices GROUP BY status;
 ## Support
 
 For questions or issues:
+
 1. Check Laravel documentation: https://laravel.com/docs
 2. Check your server logs: `storage/logs/laravel.log`
 3. Test API endpoints with Postman before integrating with React

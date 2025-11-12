@@ -5,9 +5,11 @@ Complete this checklist to fully integrate your React frontend with Laravel back
 ## Phase 1: Database Setup ✓ REQUIRED
 
 - [ ] Create `orders` migration
+
   ```bash
   php artisan make:migration create_orders_table
   ```
+
   - [ ] Add all fields from LARAVEL_BACKEND_SETUP.md
   - [ ] Add indexes for frequently queried fields
   - [ ] Run migration: `php artisan migrate`
@@ -102,6 +104,7 @@ Complete this checklist to fully integrate your React frontend with Laravel back
 ## Phase 6: Configuration ✓ REQUIRED
 
 - [ ] Laravel `.env`:
+
   ```env
   DB_CONNECTION=mysql
   DB_HOST=localhost
@@ -113,6 +116,7 @@ Complete this checklist to fully integrate your React frontend with Laravel back
   ```
 
 - [ ] CORS Configuration in `config/cors.php`:
+
   ```php
   'allowed_origins' => [
       'https://your-frontend-domain.com',
@@ -311,11 +315,13 @@ curl -X POST http://localhost:8000/api/orders \
 ---
 
 **Total Estimated Time:** 2-3 days (depending on complexity)
+
 - Phase 1-4: 1 day (core functionality)
 - Phase 5-8: 1 day (testing & security)
 - Phase 9-14: Optional (1+ days for nice-to-have features)
 
 **Priority Order:**
+
 1. Phases 1-4: REQUIRED
 2. Phases 5-8: CRITICAL
 3. Phases 9-14: OPTIONAL (but recommended)

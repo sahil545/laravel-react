@@ -137,7 +137,7 @@ export default function CheckoutExample() {
       // setOrderPlaced(true);
     } catch (error) {
       toast.error(
-        error instanceof Error ? error.message : "Failed to process order"
+        error instanceof Error ? error.message : "Failed to process order",
       );
       console.error("Order processing error:", error);
     }
@@ -171,7 +171,7 @@ export default function CheckoutExample() {
 // CORS CONFIGURATION (Laravel)
 // ============================================================================
 // In your Laravel config/cors.php, allow requests from your frontend:
-// 
+//
 // 'allowed_origins' => [
 //     'https://your-frontend-domain.com',
 //     'http://localhost:3000', // for development
@@ -181,25 +181,25 @@ export default function CheckoutExample() {
 // AUTHENTICATION (Optional - if you have user authentication)
 // ============================================================================
 // If you're using Laravel Sanctum or JWT for authentication:
-// 
+//
 // 1. Install Laravel Sanctum:
 //    php artisan install:api
-// 
+//
 // 2. Authenticate users from React using:
 //    POST /api/login - authenticate and get token
 //    POST /api/logout - logout
 //    GET /api/user - get authenticated user
-// 
+//
 // 3. Store token in localStorage:
 //    localStorage.setItem('authToken', response.token);
-// 
+//
 // 4. The orderApi.ts already includes token in headers automatically
 
 // ============================================================================
 // TESTING WITH POSTMAN
 // ============================================================================
 // You can test the APIs manually before integrating with React:
-// 
+//
 // 1. Create Order:
 //    POST /api/orders
 //    Headers: Content-Type: application/json
@@ -229,7 +229,7 @@ export default function CheckoutExample() {
 //        }
 //      ]
 //    }
-// 
+//
 // 2. Record Payment:
 //    POST /api/payments
 //    Headers: Content-Type: application/json
@@ -241,13 +241,13 @@ export default function CheckoutExample() {
 //      "card_last_four": "4242",
 //      "card_brand": "visa"
 //    }
-// 
+//
 // 3. Generate Invoice:
 //    GET /api/orders/1/invoice
-// 
+//
 // 4. Get Order Details:
 //    GET /api/orders/1
-// 
+//
 // 5. Get Order Payments:
 //    GET /api/orders/1/payments
 
@@ -256,17 +256,17 @@ export default function CheckoutExample() {
 // ============================================================================
 // Get all orders:
 //   SELECT * FROM orders ORDER BY created_at DESC
-// 
+//
 // Get today's revenue:
 //   SELECT SUM(total_amount) as revenue FROM orders WHERE DATE(created_at) = CURDATE()
-// 
+//
 // Get order with items:
 //   SELECT o.*, oi.* FROM orders o
 //   LEFT JOIN order_items oi ON o.id = oi.order_id
 //   WHERE o.id = ?
-// 
+//
 // Get payment history:
 //   SELECT * FROM payments WHERE order_id = ? ORDER BY created_at DESC
-// 
+//
 // Get invoice:
 //   SELECT * FROM invoices WHERE order_id = ?

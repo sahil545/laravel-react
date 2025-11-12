@@ -1,5 +1,6 @@
 // Order API endpoints for Laravel backend
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "https://your-laravel-backend.com/api";
+const BACKEND_URL =
+  import.meta.env.VITE_BACKEND_URL || "https://your-laravel-backend.com/api";
 
 export interface OrderData {
   customer_email: string;
@@ -52,13 +53,17 @@ export interface OrderResponse {
 
 // Get auth token (adjust based on your auth implementation)
 function getAuthToken(): string | null {
-  return localStorage.getItem("authToken") || sessionStorage.getItem("authToken");
+  return (
+    localStorage.getItem("authToken") || sessionStorage.getItem("authToken")
+  );
 }
 
 /**
  * Create an order in the Laravel backend
  */
-export async function createOrder(orderData: OrderData): Promise<OrderResponse> {
+export async function createOrder(
+  orderData: OrderData,
+): Promise<OrderResponse> {
   const response = await fetch(`${BACKEND_URL}/orders`, {
     method: "POST",
     headers: {
@@ -171,7 +176,10 @@ export async function getOrderPayments(orderId: number): Promise<any[]> {
 /**
  * Update order status (admin only)
  */
-export async function updateOrderStatus(orderId: number, status: string): Promise<any> {
+export async function updateOrderStatus(
+  orderId: number,
+  status: string,
+): Promise<any> {
   const response = await fetch(`${BACKEND_URL}/orders/${orderId}`, {
     method: "PUT",
     headers: {

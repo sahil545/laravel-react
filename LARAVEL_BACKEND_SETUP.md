@@ -36,7 +36,7 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->string('customer_email');
             $table->string('customer_phone');
-            
+
             // Shipping Information
             $table->string('shipping_first_name');
             $table->string('shipping_last_name');
@@ -45,21 +45,21 @@ return new class extends Migration
             $table->string('shipping_state');
             $table->string('shipping_postal_code');
             $table->string('shipping_country')->default('US');
-            
+
             // Order Totals
             $table->decimal('subtotal', 12, 2)->default(0);
             $table->decimal('tax_amount', 12, 2)->default(0);
             $table->decimal('shipping_cost', 12, 2)->default(0);
             $table->decimal('discount_amount', 12, 2)->default(0);
             $table->decimal('total_amount', 12, 2)->default(0);
-            
+
             // Promo Code
             $table->string('promo_code')->nullable();
-            
+
             // Status
             $table->enum('status', ['pending', 'confirmed', 'processing', 'shipped', 'delivered', 'cancelled'])->default('pending');
             $table->text('notes')->nullable();
-            
+
             $table->timestamps();
             $table->index('order_number');
             $table->index('status');
@@ -130,19 +130,19 @@ return new class extends Migration
             $table->string('payment_method'); // stripe, paypal, credit_card, etc.
             $table->decimal('amount', 12, 2);
             $table->enum('status', ['pending', 'processing', 'completed', 'failed', 'refunded'])->default('pending');
-            
+
             // Payment Gateway Reference
             $table->string('transaction_id')->nullable(); // Stripe payment intent ID
             $table->string('gateway_response')->nullable(); // JSON response from payment gateway
-            
+
             // Card Details (encrypted)
             $table->string('card_last_four')->nullable();
             $table->string('card_brand')->nullable(); // visa, mastercard, etc.
-            
+
             // Metadata
             $table->text('notes')->nullable();
             $table->timestamp('processed_at')->nullable();
-            
+
             $table->timestamps();
             $table->index('transaction_id');
             $table->index('status');
@@ -175,23 +175,23 @@ return new class extends Migration
             $table->id();
             $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
             $table->string('invoice_number')->unique(); // e.g., INV-2024-001
-            
+
             // Invoice Details
             $table->text('invoice_data')->nullable(); // JSON with line items, totals, etc.
-            
+
             // Status
             $table->enum('status', ['draft', 'sent', 'viewed', 'paid', 'cancelled'])->default('draft');
-            
+
             // Dates
             $table->date('invoice_date');
             $table->date('due_date')->nullable();
             $table->timestamp('sent_at')->nullable();
             $table->timestamp('viewed_at')->nullable();
             $table->timestamp('paid_at')->nullable();
-            
+
             // File Path (if storing PDF)
             $table->string('pdf_path')->nullable();
-            
+
             $table->timestamps();
             $table->index('invoice_number');
             $table->index('status');
@@ -430,11 +430,11 @@ Route::middleware('api')->group(function () {
     Route::get('/orders', [OrderController::class, 'index']);
     Route::get('/orders/{order}', [OrderController::class, 'show']);
     Route::put('/orders/{order}', [OrderController::class, 'update']);
-    
+
     // Payments
     Route::post('/payments', [PaymentController::class, 'store']);
     Route::get('/orders/{order}/payments', [PaymentController::class, 'orderPayments']);
-    
+
     // Invoices
     Route::get('/orders/{order}/invoice', [InvoiceController::class, 'generate']);
     Route::get('/invoices/{invoice}', [InvoiceController::class, 'show']);
@@ -683,14 +683,14 @@ const handlePaymentSuccess = async (paymentIntentId: string) => {
       shipping_city: formData.city,
       shipping_state: formData.state,
       shipping_postal_code: formData.postalCode,
-      shipping_country: 'US',
+      shipping_country: "US",
       subtotal: subtotal,
       tax_amount: taxAmount,
       shipping_cost: shippingCost,
       discount_amount: discount,
       total_amount: finalTotal,
       promo_code: appliedPromo || null,
-      items: cart.map(item => ({
+      items: cart.map((item) => ({
         product_id: item.product_id,
         product_name: item.product_name,
         unit_price: item.product_price,
@@ -701,53 +701,62 @@ const handlePaymentSuccess = async (paymentIntentId: string) => {
     };
 
     // Send order to backend
-    const response = await fetch('https://your-laravel-backend.com/api/orders', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('authToken')}`, // if using auth
+    const response = await fetch(
+      "https://your-laravel-backend.com/api/orders",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`, // if using auth
+        },
+        body: JSON.stringify(orderData),
       },
-      body: JSON.stringify(orderData),
-    });
+    );
 
-    if (!response.ok) throw new Error('Failed to create order');
+    if (!response.ok) throw new Error("Failed to create order");
     const orderResult = await response.json();
 
     // Record payment
     const paymentData = {
       order_id: orderResult.order.id,
-      payment_method: 'stripe',
+      payment_method: "stripe",
       amount: finalTotal,
       transaction_id: paymentIntentId,
-      card_last_four: '4242', // extract from card
-      card_brand: 'visa',
+      card_last_four: "4242", // extract from card
+      card_brand: "visa",
     };
 
-    const paymentResponse = await fetch('https://your-laravel-backend.com/api/payments', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+    const paymentResponse = await fetch(
+      "https://your-laravel-backend.com/api/payments",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        },
+        body: JSON.stringify(paymentData),
       },
-      body: JSON.stringify(paymentData),
-    });
+    );
 
-    if (!paymentResponse.ok) throw new Error('Failed to record payment');
+    if (!paymentResponse.ok) throw new Error("Failed to record payment");
 
     // Generate invoice
-    await fetch(`https://your-laravel-backend.com/api/orders/${orderResult.order.id}/invoice`, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+    await fetch(
+      `https://your-laravel-backend.com/api/orders/${orderResult.order.id}/invoice`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        },
       },
-    });
+    );
 
-    toast.success('Order placed successfully!');
+    toast.success("Order placed successfully!");
     clearCart();
     setOrderPlaced(true);
   } catch (error) {
-    console.error('Error processing order:', error);
-    toast.error('Failed to process order. Please try again.');
+    console.error("Error processing order:", error);
+    toast.error("Failed to process order. Please try again.");
   }
 };
 ```
