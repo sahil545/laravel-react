@@ -38,45 +38,47 @@ export default function CategorySection() {
         </div>
 
         {/* Categories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-          {loading && (
-            <div className="col-span-full text-center py-8">
-              <p className="text-gray-600">Loading categories...</p>
-            </div>
-          )}
-          {error && (
-            <div className="col-span-full text-center py-8">
-              <p className="text-red-600">{error}</p>
-            </div>
-          )}
-          {!loading && !error && categories.length === 0 && (
-            <div className="col-span-full text-center py-8">
-              <p className="text-gray-600">No categories available</p>
-            </div>
-          )}
-          {categories.map((category) => (
-            <div key={category.id} className="relative group cursor-pointer overflow-hidden rounded-[20px]">
-              <div className="relative w-full aspect-square bg-gray-200">
-                {category.category_thumbnail && (
-                  <img
-                    src={category.category_thumbnail}
-                    alt={category.category_name}
-                    className="w-full h-full object-cover"
-                  />
-                )}
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+        {loading && (
+          <div className="flex justify-center py-8">
+            <p className="text-gray-600">Loading categories...</p>
+          </div>
+        )}
+        {error && (
+          <div className="flex justify-center py-8">
+            <p className="text-red-600">{error}</p>
+          </div>
+        )}
+        {!loading && !error && categories.length === 0 && (
+          <div className="flex justify-center py-8">
+            <p className="text-gray-600">No categories available</p>
+          </div>
+        )}
+        {!loading && !error && categories.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+            {categories.map((category) => (
+              <div key={category.id} className="relative group cursor-pointer overflow-hidden rounded-[20px]">
+                <div className="relative w-full aspect-square bg-gray-200">
+                  {category.category_thumbnail && (
+                    <img
+                      src={category.category_thumbnail}
+                      alt={category.category_name}
+                      className="w-full h-full object-cover"
+                    />
+                  )}
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
 
-                {/* Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 lg:p-8 text-center">
-                  <h3 className="font-inter font-bold text-white text-[28px] md:text-[36px] lg:text-[41px] leading-[40px] md:leading-[58px] mb-1">
-                    {category.category_name}
-                  </h3>
+                  {/* Content */}
+                  <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 lg:p-8 text-center">
+                    <h3 className="font-inter font-bold text-white text-[28px] md:text-[36px] lg:text-[41px] leading-[40px] md:leading-[58px] mb-1">
+                      {category.category_name}
+                    </h3>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
