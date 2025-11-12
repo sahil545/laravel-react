@@ -166,6 +166,7 @@ export default function Checkout() {
       return;
     }
 
+    clearCart();
     setOrderPlaced(true);
   };
 
