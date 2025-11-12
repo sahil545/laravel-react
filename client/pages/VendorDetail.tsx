@@ -9,7 +9,16 @@ import {
   getProducts,
   getProductImageUrl,
 } from "@/lib/api";
-import { ChevronLeft } from "lucide-react";
+import {
+  ChevronLeft,
+  MapPin,
+  Phone,
+  Mail,
+  Calendar,
+  Package,
+  Star,
+  Shield,
+} from "lucide-react";
 
 export default function VendorDetail() {
   const { vendor_id } = useParams<{ vendor_id: string }>();
