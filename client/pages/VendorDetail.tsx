@@ -262,9 +262,22 @@ export default function VendorDetail() {
                       <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors text-sm">
                         {product.product_name}
                       </h3>
-                      <p className="text-xs text-gray-600 mb-4 line-clamp-2">
+                      <p className="text-xs text-gray-600 mb-3 line-clamp-2">
                         {product.product_short_description}
                       </p>
+
+                      {/* Color Swatches */}
+                      {product.product_colors && (
+                        <div className="mb-3">
+                          <ColorSwatch
+                            colors={product.product_colors
+                              .split(",")
+                              .map((c) => c.trim())}
+                            onColorSelect={() => {}}
+                            size="sm"
+                          />
+                        </div>
+                      )}
                     </div>
 
                     {/* Price and Stock */}
