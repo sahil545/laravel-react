@@ -12,6 +12,7 @@ import {
 import { useCart } from "@/hooks/use-cart";
 import { ChevronLeft, ShoppingCart, Plus, Minus } from "lucide-react";
 import SimilarProductsCarousel from "@/components/SimilarProductsCarousel";
+import ColorSwatch from "@/components/ColorSwatch";
 import { toast } from "sonner";
 
 export default function ProductDetail() {
@@ -21,6 +22,7 @@ export default function ProductDetail() {
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState<string>("");
+  const [selectedColor, setSelectedColor] = useState<string>("");
   const { addToCart } = useCart();
 
   useEffect(() => {
@@ -51,19 +53,30 @@ export default function ProductDetail() {
   const handleAddToCart = () => {
     if (!product) return;
 
+    const colors =
+      product.product_colors?.split(",").map((c) => c.trim()) || [];
+    if (colors.length > 0 && !selectedColor) {
+      toast.error("Please select a color", {
+        description: "Color selection is required for this product",
+      });
+      return;
+    }
+
     addToCart({
       product_id: product.product_id,
       product_name: product.product_name,
       product_price: product.product_price,
       quantity,
       product_thumbnail: product.product_thumbnail,
+      selectedColor: selectedColor || undefined,
     });
 
     toast.success(`${product.product_name} added to cart!`, {
-      description: `Quantity: ${quantity}`,
+      description: `Quantity: ${quantity}${selectedColor ? `, Color: ${selectedColor}` : ""}`,
     });
 
     setQuantity(1);
+    setSelectedColor("");
   };
 
   const handleQuantityChange = (change: number) => {
@@ -113,7 +126,7 @@ export default function ProductDetail() {
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Back Button */}
         <Link
-          to={vendor ? `/vendor/${vendor.vendor_id}` : "/"}
+          to={vendor ? `/vendor/${vendor.id}` : "/"}
           className="inline-flex items-center gap-2 text-blue-500 hover:text-blue-700 mb-8"
         >
           <ChevronLeft className="w-5 h-5" />
@@ -166,7 +179,7 @@ export default function ProductDetail() {
                 <p className="text-lg text-gray-600">
                   By{" "}
                   <Link
-                    to={`/vendor/${vendor.vendor_id}`}
+                    to={`/vendor/${vendor.id}`}
                     className="text-blue-600 hover:text-blue-700 font-semibold"
                   >
                     {vendor.shop_name || vendor.name}
@@ -211,16 +224,12 @@ export default function ProductDetail() {
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">
                   Available Colors
                 </h3>
-                <div className="flex flex-wrap gap-2">
-                  {colors.map((color, index) => (
-                    <div
-                      key={index}
-                      className="px-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-700 hover:border-[#070418] cursor-pointer transition-colors"
-                    >
-                      {color}
-                    </div>
-                  ))}
-                </div>
+                <ColorSwatch
+                  colors={colors}
+                  selectedColor={selectedColor}
+                  onColorSelect={setSelectedColor}
+                  size="lg"
+                />
               </div>
             )}
 

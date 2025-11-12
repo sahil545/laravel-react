@@ -11,6 +11,7 @@ import {
   getProductImageUrl,
 } from "@/lib/api";
 import { Link } from "react-router-dom";
+import ColorSwatch from "@/components/ColorSwatch";
 
 const PRODUCTS_PER_PAGE = 12;
 
@@ -211,6 +212,23 @@ export default function Shop() {
                         <p className="text-sm text-gray-600 mb-3 line-clamp-2">
                           {product.product_short_description}
                         </p>
+
+                        {/* Color Swatches */}
+                        {product.product_colors && (
+                          <div className="mb-3">
+                            <p className="text-xs text-gray-600 mb-2">
+                              Colors:
+                            </p>
+                            <ColorSwatch
+                              colors={product.product_colors
+                                .split(",")
+                                .map((c) => c.trim())}
+                              onColorSelect={() => {}}
+                              size="sm"
+                            />
+                          </div>
+                        )}
+
                         <div className="flex justify-between items-center">
                           <span className="text-xl font-bold text-[#070418]">
                             ${product.product_price.toLocaleString("en-US")}

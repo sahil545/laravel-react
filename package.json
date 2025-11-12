@@ -26,6 +26,8 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
+    "@stripe/js": "^3.5.0",
+    "@stripe/react-stripe-js": "^2.7.3",
     "@hookform/resolvers": "^5.2.1",
     "@radix-ui/react-accordion": "^1.2.11",
     "@radix-ui/react-alert-dialog": "^1.1.14",

@@ -5,6 +5,8 @@ import { useCart } from "@/hooks/use-cart";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Check } from "lucide-react";
 import { getProductImageUrl } from "@/lib/api";
+import StripePaymentForm from "@/components/StripePaymentForm";
+import { toast } from "sonner";
 
 interface CheckoutFormData {
   firstName: string;
@@ -21,7 +23,7 @@ interface CheckoutFormData {
 }
 
 export default function Checkout() {
-  const { cart } = useCart();
+  const { cart, clearCart } = useCart();
   const navigate = useNavigate();
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [formData, setFormData] = useState<CheckoutFormData>({
@@ -155,18 +157,8 @@ export default function Checkout() {
       return;
     }
 
-    if (!formData.cardNumber || !formData.expiryDate || !formData.cvv) {
-      alert("Please fill in all payment details");
-      return;
-    }
-
-    // Validate card number (basic validation)
-    if (formData.cardNumber.replace(/\s/g, "").length !== 16) {
-      alert("Please enter a valid 16-digit card number");
-      return;
-    }
-
-    setOrderPlaced(true);
+    // Payment will be handled by the Stripe payment form
+    // Just validate shipping address is complete
   };
 
   return (
@@ -188,7 +180,7 @@ export default function Checkout() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Checkout Form */}
           <div className="lg:col-span-2">
-            <form onSubmit={handleSubmit} className="space-y-8">
+            <form className="space-y-8">
               {/* Shipping Address Section */}
               <div className="bg-white rounded-lg border border-gray-200 p-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">
@@ -284,78 +276,36 @@ export default function Checkout() {
                   Payment Information
                 </h2>
 
-                <input
-                  type="text"
-                  name="cardNumber"
-                  placeholder="Card Number (16 digits)"
-                  value={formData.cardNumber}
-                  onChange={(e) => {
-                    const value = e.target.value.replace(/\s/g, "");
-                    if (value.length <= 16) {
-                      const formatted = value.replace(/(\d{4})/g, "$1 ").trim();
-                      setFormData((prev) => ({
-                        ...prev,
-                        cardNumber: formatted,
-                      }));
+                <StripePaymentForm
+                  amount={total}
+                  onSubmit={(e) => {
+                    if (
+                      !formData.firstName ||
+                      !formData.lastName ||
+                      !formData.email ||
+                      !formData.phone ||
+                      !formData.address ||
+                      !formData.city ||
+                      !formData.state ||
+                      !formData.postalCode
+                    ) {
+                      toast.error(
+                        "Please fill in all shipping information first",
+                      );
+                      return false;
                     }
+                    return true;
                   }}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 mb-4 font-mono"
-                  placeholder="1234 5678 9012 3456"
-                  required
+                  onPaymentSuccess={(paymentIntentId) => {
+                    clearCart();
+                    toast.success("Payment processed successfully!");
+                    setOrderPlaced(true);
+                  }}
+                  onPaymentError={(error) => {
+                    toast.error("Payment failed: " + error);
+                  }}
                 />
-
-                <div className="grid grid-cols-2 gap-4">
-                  <input
-                    type="text"
-                    name="expiryDate"
-                    placeholder="MM/YY"
-                    value={formData.expiryDate}
-                    onChange={(e) => {
-                      let value = e.target.value.replace(/\D/g, "");
-                      if (value.length >= 2) {
-                        value = value.slice(0, 2) + "/" + value.slice(2, 4);
-                      }
-                      setFormData((prev) => ({
-                        ...prev,
-                        expiryDate: value,
-                      }));
-                    }}
-                    className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-                    maxLength={5}
-                    required
-                  />
-                  <input
-                    type="text"
-                    name="cvv"
-                    placeholder="CVV"
-                    value={formData.cvv}
-                    onChange={(e) => {
-                      const value = e.target.value.replace(/\D/g, "");
-                      if (value.length <= 3) {
-                        setFormData((prev) => ({
-                          ...prev,
-                          cvv: value,
-                        }));
-                      }
-                    }}
-                    className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-                    maxLength={3}
-                    required
-                  />
-                </div>
-
-                <p className="text-sm text-gray-500 mt-4">
-                  Your payment information is secure and encrypted.
-                </p>
               </div>
-
-              {/* Submit Button */}
-              <button
-                type="submit"
-                className="w-full bg-blue-600 text-white py-4 rounded-lg font-bold text-lg hover:bg-blue-700 transition"
-              >
-                Place Order (${total.toLocaleString("en-US")})
-              </button>
             </form>
           </div>
 

@@ -12,6 +12,7 @@ import {
   Package,
 } from "lucide-react";
 import { getProductImageUrl } from "@/lib/api";
+import ColorSwatch from "@/components/ColorSwatch";
 
 export default function Cart() {
   const { cart, removeFromCart, updateQuantity } = useCart();
@@ -121,6 +122,20 @@ export default function Cart() {
                         >
                           {item.product_name}
                         </Link>
+                        {item.selectedColor && (
+                          <div className="flex items-center gap-2 mb-3">
+                            <span className="text-sm text-gray-600">Color:</span>
+                            <ColorSwatch
+                              colors={[item.selectedColor]}
+                              selectedColor={item.selectedColor}
+                              onColorSelect={() => {}}
+                              size="sm"
+                            />
+                            <span className="text-sm text-gray-700">
+                              {item.selectedColor}
+                            </span>
+                          </div>
+                        )}
                         <p className="text-2xl font-bold text-blue-600">
                           ${item.product_price.toLocaleString("en-US")}
                         </p>

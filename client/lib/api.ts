@@ -20,6 +20,14 @@ export interface Vendor {
   shop_description: string | null;
 }
 
+export interface Category {
+  id: number;
+  category_name: string;
+  category_slug: string;
+  category_image?: string;
+  category_description?: string;
+}
+
 export interface Product {
   product_id: number;
   product_name: string;
@@ -45,11 +53,27 @@ export async function getVendors(): Promise<Vendor[]> {
     const data = await response.json();
 
     if (data.status && Array.isArray(data.data)) {
-      return data.data;
+      // Filter to only include vendors with role="vendor"
+      return data.data.filter((vendor: Vendor) => vendor.role === "vendor");
     }
     return [];
   } catch (error) {
     console.error("Error fetching vendors:", error);
+    return [];
+  }
+}
+
+export async function getCategories(): Promise<Category[]> {
+  try {
+    const response = await fetch(`${API_BASE_URL}/categories`);
+    const data = await response.json();
+
+    if (data.status && Array.isArray(data.data)) {
+      return data.data;
+    }
+    return [];
+  } catch (error) {
+    console.error("Error fetching categories:", error);
     return [];
   }
 }
