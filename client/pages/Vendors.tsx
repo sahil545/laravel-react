@@ -134,8 +134,8 @@ export default function Vendors() {
             <div className="space-y-6">
               {paginatedVendors.map((vendor) => (
                 <Link
-                  key={vendor.vendor_id}
-                  to={`/vendor/${vendor.vendor_id}`}
+                  key={vendor.id}
+                  to={`/vendor/${vendor.id}`}
                   className="group block"
                 >
                   <div className="bg-white rounded-xl border border-gray-200 hover:border-blue-400 hover:shadow-xl transition-all duration-300 overflow-hidden">
