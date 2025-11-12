@@ -157,19 +157,8 @@ export default function Checkout() {
       return;
     }
 
-    if (!formData.cardNumber || !formData.expiryDate || !formData.cvv) {
-      alert("Please fill in all payment details");
-      return;
-    }
-
-    // Validate card number (basic validation)
-    if (formData.cardNumber.replace(/\s/g, "").length !== 16) {
-      alert("Please enter a valid 16-digit card number");
-      return;
-    }
-
-    clearCart();
-    setOrderPlaced(true);
+    // Payment will be handled by the Stripe payment form
+    // Just validate shipping address is complete
   };
 
   return (
