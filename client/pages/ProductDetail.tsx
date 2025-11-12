@@ -53,19 +53,29 @@ export default function ProductDetail() {
   const handleAddToCart = () => {
     if (!product) return;
 
+    const colors = product.product_colors?.split(",").map((c) => c.trim()) || [];
+    if (colors.length > 0 && !selectedColor) {
+      toast.error("Please select a color", {
+        description: "Color selection is required for this product",
+      });
+      return;
+    }
+
     addToCart({
       product_id: product.product_id,
       product_name: product.product_name,
       product_price: product.product_price,
       quantity,
       product_thumbnail: product.product_thumbnail,
+      selectedColor: selectedColor || undefined,
     });
 
     toast.success(`${product.product_name} added to cart!`, {
-      description: `Quantity: ${quantity}`,
+      description: `Quantity: ${quantity}${selectedColor ? `, Color: ${selectedColor}` : ""}`,
     });
 
     setQuantity(1);
+    setSelectedColor("");
   };
 
   const handleQuantityChange = (change: number) => {
