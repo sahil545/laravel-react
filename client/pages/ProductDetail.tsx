@@ -125,7 +125,7 @@ export default function ProductDetail() {
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Back Button */}
         <Link
-          to={vendor ? `/vendor/${vendor.vendor_id}` : "/"}
+          to={vendor ? `/vendor/${vendor.id}` : "/"}
           className="inline-flex items-center gap-2 text-blue-500 hover:text-blue-700 mb-8"
         >
           <ChevronLeft className="w-5 h-5" />
