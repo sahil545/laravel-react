@@ -1,4 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function ComingSoonSection() {
   const products = [
@@ -26,10 +27,10 @@ export default function ComingSoonSection() {
             </svg>
           </div>
           
-          <button className="flex items-center gap-2 px-4 py-3 rounded-lg border border-[#525252] hover:bg-gray-50 transition">
+          <Link to="/shop" className="flex items-center gap-2 px-4 py-3 rounded-lg border border-[#525252] hover:bg-gray-50 transition">
             <span className="font-amiko font-bold text-[18px]">See all</span>
             <ArrowUpRight className="w-4 h-4" />
-          </button>
+          </Link>
         </div>
 
         {/* Products Grid */}
@@ -52,10 +53,10 @@ export default function ComingSoonSection() {
                     {product.title}
                   </h3>
                   
-                  <button className="flex items-center gap-2 px-3 md:px-4 py-2 md:py-3 rounded-lg border border-[#525252] hover:bg-gray-50 transition whitespace-nowrap">
+                  <Link to="/shop" className="flex items-center gap-2 px-3 md:px-4 py-2 md:py-3 rounded-lg border border-[#525252] hover:bg-gray-50 transition whitespace-nowrap">
                     <span className="font-amiko font-semibold text-[18px]">Shop Now</span>
                     <ArrowUpRight className="w-4 h-4" />
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
