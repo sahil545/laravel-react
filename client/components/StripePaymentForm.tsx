@@ -1,14 +1,5 @@
 import { useState } from "react";
-import {
-  CardElement,
-  useStripe,
-  useElements,
-  CardNumberElement,
-  CardExpiryElement,
-  CardCvcElement,
-} from "@stripe/react-stripe-js";
-import { StripeCardElementOptions } from "@stripe/stripe-js";
-import { AlertCircle, Loader } from "lucide-react";
+import { AlertCircle, Loader, Lock } from "lucide-react";
 
 interface StripePaymentFormProps {
   amount: number;
