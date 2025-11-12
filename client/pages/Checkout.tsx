@@ -288,13 +288,6 @@ export default function Checkout() {
                 />
               </div>
 
-              {/* Submit Button */}
-              <button
-                type="submit"
-                className="w-full bg-blue-600 text-white py-4 rounded-lg font-bold text-lg hover:bg-blue-700 transition"
-              >
-                Place Order (${total.toLocaleString("en-US")})
-              </button>
             </form>
           </div>
 
