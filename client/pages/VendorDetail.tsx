@@ -93,10 +93,10 @@ export default function VendorDetail() {
         {/* Vendor Header Section */}
         <div className="bg-white rounded-xl border border-gray-200 mb-12 overflow-hidden">
           {/* Hero Background */}
-          <div className="h-32 bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700"></div>
+          <div className="h-20 bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700"></div>
 
           {/* Vendor Info Container */}
-          <div className="px-8 pb-8 -mt-16 relative z-10">
+          <div className="px-8 pb-8 -mt-10 pt-6 relative z-10">
             {/* Vendor Avatar Placeholder */}
             <div className="flex flex-col md:flex-row md:items-end gap-6 mb-6">
               <div className="w-32 h-32 flex-shrink-0 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl border-4 border-white shadow-lg flex items-center justify-center">
@@ -162,7 +162,7 @@ export default function VendorDetail() {
             </div>
 
             {/* Contact Information */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-start">
               <div className="flex gap-4">
                 <div className="pt-1 flex-shrink-0">
                   <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
