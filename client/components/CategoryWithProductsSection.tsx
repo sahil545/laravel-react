@@ -108,7 +108,7 @@ export default function CategoryWithProductsSection({ categoryId }: CategoryWith
               <div
                 key={product.product_id}
                 className="group cursor-pointer"
-                onClick={() => navigate(`/product/${product.product_slug}`)}
+                onClick={() => navigate(`/product/${product.product_id}`)}
               >
                 {/* Product Image */}
                 <div className="relative w-full aspect-square rounded-[10px] overflow-hidden mb-4 bg-gray-100">
