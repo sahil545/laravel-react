@@ -296,10 +296,102 @@ export default function Checkout() {
                     }
                     return true;
                   }}
-                  onPaymentSuccess={(paymentIntentId) => {
-                    clearCart();
-                    toast.success("Payment processed successfully!");
-                    setOrderPlaced(true);
+                  onPaymentSuccess={async (paymentIntentId) => {
+                    try {
+                      // Prepare order data
+                      const orderData = {
+                        customer_email: formData.email,
+                        customer_phone: formData.phone,
+                        shipping_first_name: formData.firstName,
+                        shipping_last_name: formData.lastName,
+                        shipping_address: formData.address,
+                        shipping_city: formData.city,
+                        shipping_state: formData.state,
+                        shipping_postal_code: formData.postalCode,
+                        shipping_country: "US",
+                        subtotal: subtotal,
+                        tax_amount: taxAmount,
+                        shipping_cost: shippingCost,
+                        discount_amount: 0,
+                        total_amount: total,
+                        promo_code: null,
+                        items: cart.map((item) => ({
+                          product_id: item.product_id,
+                          product_name: item.product_name,
+                          unit_price: item.product_price,
+                          quantity: item.quantity,
+                          total_price: item.product_price * item.quantity,
+                          selected_color: item.selectedColor || null,
+                        })),
+                      };
+
+                      // Send order to backend
+                      const response = await fetch(
+                        "https://ecommerce.standtogetherhelp.com/api/orders",
+                        {
+                          method: "POST",
+                          headers: {
+                            "Content-Type": "application/json",
+                          },
+                          body: JSON.stringify(orderData),
+                        },
+                      );
+
+                      if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(
+                          errorData.message || "Failed to create order",
+                        );
+                      }
+                      const orderResult = await response.json();
+
+                      // Record payment
+                      const paymentData = {
+                        order_id: orderResult.order.id,
+                        payment_method: "stripe",
+                        amount: total,
+                        transaction_id: paymentIntentId,
+                        card_last_four: "****",
+                        card_brand: "card",
+                      };
+
+                      const paymentResponse = await fetch(
+                        "https://ecommerce.standtogetherhelp.com/api/payments",
+                        {
+                          method: "POST",
+                          headers: {
+                            "Content-Type": "application/json",
+                          },
+                          body: JSON.stringify(paymentData),
+                        },
+                      );
+
+                      if (!paymentResponse.ok) {
+                        throw new Error("Failed to record payment");
+                      }
+
+                      // Generate invoice
+                      await fetch(
+                        `https://ecommerce.standtogetherhelp.com/api/orders/${orderResult.order.id}/invoice`,
+                        {
+                          method: "GET",
+                          headers: {
+                            "Content-Type": "application/json",
+                          },
+                        },
+                      );
+
+                      clearCart();
+                      toast.success("Order placed successfully!");
+                      setOrderPlaced(true);
+                    } catch (error) {
+                      console.error("Error processing order:", error);
+                      toast.error(
+                        error instanceof Error
+                          ? error.message
+                          : "Failed to process order. Please try again.",
+                      );
+                    }
                   }}
                   onPaymentError={(error) => {
                     toast.error("Payment failed: " + error);
