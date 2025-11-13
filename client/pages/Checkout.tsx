@@ -298,6 +298,8 @@ export default function Checkout() {
                   }}
                   onPaymentSuccess={async (paymentIntentId) => {
                     try {
+                      console.log("Payment success callback triggered");
+
                       // Prepare order data
                       const orderData = {
                         customer_email: formData.email,
@@ -325,6 +327,8 @@ export default function Checkout() {
                         })),
                       };
 
+                      console.log("Sending order data:", orderData);
+
                       // Send order to backend
                       const response = await fetch(
                         "https://ecommerce.standtogetherhelp.com/api/orders",
@@ -337,13 +341,25 @@ export default function Checkout() {
                         },
                       );
 
+                      console.log("Order API response status:", response.status);
+                      const responseText = await response.text();
+                      console.log("Order API response:", responseText);
+
                       if (!response.ok) {
-                        const errorData = await response.json();
-                        throw new Error(
-                          errorData.message || "Failed to create order",
-                        );
+                        try {
+                          const errorData = JSON.parse(responseText);
+                          throw new Error(
+                            errorData.message || "Failed to create order",
+                          );
+                        } catch {
+                          throw new Error(
+                            `Server error (${response.status}): ${responseText}`,
+                          );
+                        }
                       }
-                      const orderResult = await response.json();
+
+                      const orderResult = JSON.parse(responseText);
+                      console.log("Order created:", orderResult);
 
                       // Record payment
                       const paymentData = {
@@ -354,6 +370,8 @@ export default function Checkout() {
                         card_last_four: "****",
                         card_brand: "card",
                       };
+
+                      console.log("Sending payment data:", paymentData);
 
                       const paymentResponse = await fetch(
                         "https://ecommerce.standtogetherhelp.com/api/payments",
@@ -366,12 +384,23 @@ export default function Checkout() {
                         },
                       );
 
+                      console.log("Payment API response status:", paymentResponse.status);
+                      const paymentText = await paymentResponse.text();
+                      console.log("Payment API response:", paymentText);
+
                       if (!paymentResponse.ok) {
-                        throw new Error("Failed to record payment");
+                        console.warn(
+                          "Payment recording failed but continuing:",
+                          paymentText,
+                        );
                       }
 
                       // Generate invoice
-                      await fetch(
+                      console.log(
+                        "Generating invoice for order:",
+                        orderResult.order.id,
+                      );
+                      const invoiceResponse = await fetch(
                         `https://ecommerce.standtogetherhelp.com/api/orders/${orderResult.order.id}/invoice`,
                         {
                           method: "GET",
@@ -381,16 +410,19 @@ export default function Checkout() {
                         },
                       );
 
+                      console.log("Invoice API response status:", invoiceResponse.status);
+
                       clearCart();
                       toast.success("Order placed successfully!");
                       setOrderPlaced(true);
                     } catch (error) {
                       console.error("Error processing order:", error);
-                      toast.error(
+                      const errorMessage =
                         error instanceof Error
                           ? error.message
-                          : "Failed to process order. Please try again.",
-                      );
+                          : "Failed to process order. Please try again.";
+                      console.error("Full error details:", errorMessage);
+                      toast.error(errorMessage);
                     }
                   }}
                   onPaymentError={(error) => {
