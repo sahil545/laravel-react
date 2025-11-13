@@ -297,8 +297,11 @@ export default function Checkout() {
                     return true;
                   }}
                   onPaymentSuccess={async (paymentIntentId) => {
+                    console.log("=== CHECKOUT: Payment success callback triggered ===");
+                    console.log("Payment Intent ID:", paymentIntentId);
+
                     try {
-                      console.log("Payment success callback triggered");
+                      console.log("Checkout: Starting order processing");
 
                       // Prepare order data
                       const orderData = {
