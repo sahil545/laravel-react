@@ -162,7 +162,7 @@ export default function VendorDetail() {
             </div>
 
             {/* Contact Information */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 justify-start">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-2 justify-start">
               <div className="flex gap-4">
                 <div className="pt-1 flex-shrink-0">
                   <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
