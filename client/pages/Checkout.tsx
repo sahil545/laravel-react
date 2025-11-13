@@ -297,7 +297,9 @@ export default function Checkout() {
                     return true;
                   }}
                   onPaymentSuccess={async (paymentIntentId) => {
-                    console.log("=== CHECKOUT: Payment success callback triggered ===");
+                    console.log(
+                      "=== CHECKOUT: Payment success callback triggered ===",
+                    );
                     console.log("Payment Intent ID:", paymentIntentId);
 
                     try {
@@ -428,9 +430,14 @@ export default function Checkout() {
                       toast.success("Order placed successfully!");
                       setOrderPlaced(true);
                     } catch (error) {
-                      console.error("=== CHECKOUT: Error in payment success handler ===");
+                      console.error(
+                        "=== CHECKOUT: Error in payment success handler ===",
+                      );
                       console.error("Error object:", error);
-                      console.error("Error stack:", error instanceof Error ? error.stack : "No stack trace");
+                      console.error(
+                        "Error stack:",
+                        error instanceof Error ? error.stack : "No stack trace",
+                      );
 
                       const errorMessage =
                         error instanceof Error

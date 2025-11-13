@@ -97,7 +97,10 @@ export default function StripePaymentForm({
 
       // Simulate successful payment
       const paymentIntentId = "test_payment_intent_" + Date.now();
-      console.log("StripePaymentForm: Payment succeeded, calling onPaymentSuccess with:", paymentIntentId);
+      console.log(
+        "StripePaymentForm: Payment succeeded, calling onPaymentSuccess with:",
+        paymentIntentId,
+      );
 
       onPaymentSuccess(paymentIntentId);
 
