@@ -118,9 +118,13 @@ export interface CategoryWithProducts {
   sub_categories: SubCategory[];
 }
 
-export async function getCategoryWithProducts(categoryId: number): Promise<CategoryWithProducts | null> {
+export async function getCategoryWithProducts(
+  categoryId: number,
+): Promise<CategoryWithProducts | null> {
   try {
-    const response = await fetch(`${API_BASE_URL}/categories-with-products/${categoryId}`);
+    const response = await fetch(
+      `${API_BASE_URL}/categories-with-products/${categoryId}`,
+    );
     const data = await response.json();
 
     if (data.status && data.data) {

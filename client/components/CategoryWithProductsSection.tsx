@@ -6,11 +6,17 @@ interface CategoryWithProductsSectionProps {
   categoryId: number;
 }
 
-export default function CategoryWithProductsSection({ categoryId }: CategoryWithProductsSectionProps) {
-  const [categoryData, setCategoryData] = useState<CategoryWithProducts | null>(null);
+export default function CategoryWithProductsSection({
+  categoryId,
+}: CategoryWithProductsSectionProps) {
+  const [categoryData, setCategoryData] = useState<CategoryWithProducts | null>(
+    null,
+  );
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [activeSubCategoryId, setActiveSubCategoryId] = useState<number | null>(null);
+  const [activeSubCategoryId, setActiveSubCategoryId] = useState<number | null>(
+    null,
+  );
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,7 +30,9 @@ export default function CategoryWithProductsSection({ categoryId }: CategoryWith
           setActiveSubCategoryId(data.sub_categories[0].sub_category_id);
         }
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Failed to fetch category data");
+        setError(
+          err instanceof Error ? err.message : "Failed to fetch category data",
+        );
         setCategoryData(null);
       } finally {
         setLoading(false);
@@ -59,7 +67,7 @@ export default function CategoryWithProductsSection({ categoryId }: CategoryWith
   }
 
   const activeSubCategory = categoryData.sub_categories.find(
-    (sub) => sub.sub_category_id === activeSubCategoryId
+    (sub) => sub.sub_category_id === activeSubCategoryId,
   );
 
   return (
@@ -88,7 +96,9 @@ export default function CategoryWithProductsSection({ categoryId }: CategoryWith
             {categoryData.sub_categories.map((subCategory) => (
               <button
                 key={subCategory.sub_category_id}
-                onClick={() => setActiveSubCategoryId(subCategory.sub_category_id)}
+                onClick={() =>
+                  setActiveSubCategoryId(subCategory.sub_category_id)
+                }
                 className={`px-4 md:px-6 py-3 rounded-full whitespace-nowrap font-amiko font-semibold text-[14px] md:text-[16px] transition-all ${
                   activeSubCategoryId === subCategory.sub_category_id
                     ? "bg-[#032088] text-white"
@@ -137,7 +147,9 @@ export default function CategoryWithProductsSection({ categoryId }: CategoryWith
           </div>
         ) : (
           <div className="flex justify-center py-8">
-            <p className="text-gray-600">No products available in this subcategory</p>
+            <p className="text-gray-600">
+              No products available in this subcategory
+            </p>
           </div>
         )}
       </div>
