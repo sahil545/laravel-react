@@ -3,7 +3,7 @@ import HeroSection from "@/components/HeroSection";
 import VendorSection from "@/components/VendorSection";
 import ComingSoonSection from "@/components/ComingSoonSection";
 import CategorySection from "@/components/CategorySection";
-import ProductGrid from "@/components/ProductGrid";
+import CategoryWithProductsSection from "@/components/CategoryWithProductsSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ExclusiveOfferSection from "@/components/ExclusiveOfferSection";
 import ResourcesSection from "@/components/ResourcesSection";
