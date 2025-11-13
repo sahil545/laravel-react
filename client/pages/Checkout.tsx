@@ -341,7 +341,10 @@ export default function Checkout() {
                         },
                       );
 
-                      console.log("Order API response status:", response.status);
+                      console.log(
+                        "Order API response status:",
+                        response.status,
+                      );
                       const responseText = await response.text();
                       console.log("Order API response:", responseText);
 
@@ -384,7 +387,10 @@ export default function Checkout() {
                         },
                       );
 
-                      console.log("Payment API response status:", paymentResponse.status);
+                      console.log(
+                        "Payment API response status:",
+                        paymentResponse.status,
+                      );
                       const paymentText = await paymentResponse.text();
                       console.log("Payment API response:", paymentText);
 
@@ -410,7 +416,10 @@ export default function Checkout() {
                         },
                       );
 
-                      console.log("Invoice API response status:", invoiceResponse.status);
+                      console.log(
+                        "Invoice API response status:",
+                        invoiceResponse.status,
+                      );
 
                       clearCart();
                       toast.success("Order placed successfully!");
