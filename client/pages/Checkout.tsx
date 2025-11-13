@@ -428,12 +428,16 @@ export default function Checkout() {
                       toast.success("Order placed successfully!");
                       setOrderPlaced(true);
                     } catch (error) {
-                      console.error("Error processing order:", error);
+                      console.error("=== CHECKOUT: Error in payment success handler ===");
+                      console.error("Error object:", error);
+                      console.error("Error stack:", error instanceof Error ? error.stack : "No stack trace");
+
                       const errorMessage =
                         error instanceof Error
                           ? error.message
                           : "Failed to process order. Please try again.";
-                      console.error("Full error details:", errorMessage);
+
+                      console.error("Display message:", errorMessage);
                       toast.error(errorMessage);
                     }
                   }}
