@@ -59,11 +59,8 @@ export default function Header() {
               <Link to="/vendors" className="hover:text-brand-green transition">
                 Vendors
               </Link>
-              <Link
-                to="/features"
-                className="hover:text-brand-green transition"
-              >
-                Features
+              <Link to="/blogs" className="hover:text-brand-green transition">
+                Blogs
               </Link>
               <Link to="/contact" className="hover:text-brand-green transition">
                 Contact
