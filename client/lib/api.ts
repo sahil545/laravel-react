@@ -101,3 +101,38 @@ export function getProductImageUrl(imageUrl: string): string {
   // Otherwise construct the full URL (fallback for filename-only cases)
   return `https://ecommerce.standtogetherhelp.com/storage/products/${imageUrl}`;
 }
+
+export interface SubCategory {
+  sub_category_id: number;
+  sub_category_name: string;
+  sub_category_image: string;
+  sub_category_slug: string;
+  products: Product[];
+}
+
+export interface CategoryWithProducts {
+  category_id: number;
+  category_name: string;
+  category_image: string;
+  category_slug: string;
+  sub_categories: SubCategory[];
+}
+
+export async function getCategoryWithProducts(
+  categoryId: number,
+): Promise<CategoryWithProducts | null> {
+  try {
+    const response = await fetch(
+      `${API_BASE_URL}/categories-with-products/${categoryId}`,
+    );
+    const data = await response.json();
+
+    if (data.status && data.data) {
+      return data.data;
+    }
+    return null;
+  } catch (error) {
+    console.error("Error fetching category with products:", error);
+    return null;
+  }
+}

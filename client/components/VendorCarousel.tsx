@@ -65,14 +65,21 @@ export default function VendorCarousel() {
                     <Link
                       key={vendor.id}
                       to={`/vendor/${vendor.id}`}
-                      className="bg-white rounded-lg overflow-hidden h-[120px] hover:shadow-lg transition-shadow cursor-pointer flex flex-col items-center justify-center"
+                      className="relative bg-white rounded-lg overflow-hidden h-[120px] hover:shadow-lg transition-shadow cursor-pointer flex flex-col items-center justify-center group"
                     >
                       {vendor.photo ? (
-                        <img
-                          src={vendor.photo}
-                          alt={vendor.shop_name || vendor.name}
-                          className="w-full h-full object-cover"
-                        />
+                        <>
+                          <img
+                            src={vendor.photo}
+                            alt={vendor.shop_name || vendor.name}
+                            className="w-full h-full object-cover"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent flex items-end justify-start p-3">
+                            <p className="text-white text-xs font-semibold line-clamp-2">
+                              {vendor.shop_name || vendor.name}
+                            </p>
+                          </div>
+                        </>
                       ) : (
                         <div className="flex flex-col items-center justify-center h-full w-full gap-2 bg-gradient-to-br from-blue-50 to-purple-50">
                           <ShoppingBag className="w-6 h-6 text-blue-600" />

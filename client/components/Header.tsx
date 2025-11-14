@@ -59,11 +59,8 @@ export default function Header() {
               <Link to="/vendors" className="hover:text-brand-green transition">
                 Vendors
               </Link>
-              <Link
-                to="/features"
-                className="hover:text-brand-green transition"
-              >
-                Features
+              <Link to="/blogs" className="hover:text-brand-green transition">
+                Blogs
               </Link>
               <Link to="/contact" className="hover:text-brand-green transition">
                 Contact
@@ -93,7 +90,9 @@ export default function Header() {
                 Login
               </Link>
               <Link
-                to="/seller-signup"
+                to="https://ecommerce.standtogetherhelp.com/register"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hidden lg:inline-flex items-center justify-center px-4 py-3 bg-brand-blue text-white rounded-[10px] font-poppins font-medium text-[18px] hover:opacity-90 transition"
               >
                 Seller Sign Up

@@ -90,14 +90,25 @@ export default function StripePaymentForm({
     setLoading(true);
 
     try {
+      console.log("StripePaymentForm: Starting payment processing");
+
       // Simulate payment processing
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
       // Simulate successful payment
-      onPaymentSuccess("test_payment_intent_" + Date.now());
+      const paymentIntentId = "test_payment_intent_" + Date.now();
+      console.log(
+        "StripePaymentForm: Payment succeeded, calling onPaymentSuccess with:",
+        paymentIntentId,
+      );
+
+      onPaymentSuccess(paymentIntentId);
+
+      console.log("StripePaymentForm: onPaymentSuccess called successfully");
     } catch (err) {
       const errorMessage =
         err instanceof Error ? err.message : "An error occurred";
+      console.error("StripePaymentForm: Payment error:", errorMessage);
       setError(errorMessage);
       onPaymentError(errorMessage);
     } finally {

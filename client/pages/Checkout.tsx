@@ -180,7 +180,7 @@ export default function Checkout() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Checkout Form */}
           <div className="lg:col-span-2">
-            <form className="space-y-8">
+            <div className="space-y-8">
               {/* Shipping Address Section */}
               <div className="bg-white rounded-lg border border-gray-200 p-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">
@@ -296,17 +296,164 @@ export default function Checkout() {
                     }
                     return true;
                   }}
-                  onPaymentSuccess={(paymentIntentId) => {
-                    clearCart();
-                    toast.success("Payment processed successfully!");
-                    setOrderPlaced(true);
+                  onPaymentSuccess={async (paymentIntentId) => {
+                    console.log(
+                      "=== CHECKOUT: Payment success callback triggered ===",
+                    );
+                    console.log("Payment Intent ID:", paymentIntentId);
+
+                    try {
+                      console.log("Checkout: Starting order processing");
+
+                      // Prepare order data
+                      const orderData = {
+                        customer_email: formData.email,
+                        customer_phone: formData.phone,
+                        shipping_first_name: formData.firstName,
+                        shipping_last_name: formData.lastName,
+                        shipping_address: formData.address,
+                        shipping_city: formData.city,
+                        shipping_state: formData.state,
+                        shipping_postal_code: formData.postalCode,
+                        shipping_country: "US",
+                        subtotal: subtotal,
+                        tax_amount: taxAmount,
+                        shipping_cost: shippingCost,
+                        discount_amount: 0,
+                        total_amount: total,
+                        promo_code: null,
+                        items: cart.map((item) => ({
+                          product_id: item.product_id,
+                          product_name: item.product_name,
+                          unit_price: item.product_price,
+                          quantity: item.quantity,
+                          total_price: item.product_price * item.quantity,
+                          selected_color: item.selectedColor || null,
+                        })),
+                      };
+
+                      console.log("Sending order data:", orderData);
+
+                      // Send order to backend
+                      const response = await fetch(
+                        "https://ecommerce.standtogetherhelp.com/api/orders",
+                        {
+                          method: "POST",
+                          headers: {
+                            "Content-Type": "application/json",
+                          },
+                          body: JSON.stringify(orderData),
+                        },
+                      );
+
+                      console.log(
+                        "Order API response status:",
+                        response.status,
+                      );
+                      const responseText = await response.text();
+                      console.log("Order API response:", responseText);
+
+                      if (!response.ok) {
+                        try {
+                          const errorData = JSON.parse(responseText);
+                          throw new Error(
+                            errorData.message || "Failed to create order",
+                          );
+                        } catch {
+                          throw new Error(
+                            `Server error (${response.status}): ${responseText}`,
+                          );
+                        }
+                      }
+
+                      const orderResult = JSON.parse(responseText);
+                      console.log("Order created:", orderResult);
+
+                      // Record payment
+                      const paymentData = {
+                        order_id: orderResult.order.id,
+                        payment_method: "stripe",
+                        amount: total,
+                        transaction_id: paymentIntentId,
+                        card_last_four: "****",
+                        card_brand: "card",
+                      };
+
+                      console.log("Sending payment data:", paymentData);
+
+                      const paymentResponse = await fetch(
+                        "https://ecommerce.standtogetherhelp.com/api/payments",
+                        {
+                          method: "POST",
+                          headers: {
+                            "Content-Type": "application/json",
+                          },
+                          body: JSON.stringify(paymentData),
+                        },
+                      );
+
+                      console.log(
+                        "Payment API response status:",
+                        paymentResponse.status,
+                      );
+                      const paymentText = await paymentResponse.text();
+                      console.log("Payment API response:", paymentText);
+
+                      if (!paymentResponse.ok) {
+                        console.warn(
+                          "Payment recording failed but continuing:",
+                          paymentText,
+                        );
+                      }
+
+                      // Generate invoice
+                      console.log(
+                        "Generating invoice for order:",
+                        orderResult.order.id,
+                      );
+                      const invoiceResponse = await fetch(
+                        `https://ecommerce.standtogetherhelp.com/api/orders/${orderResult.order.id}/invoice`,
+                        {
+                          method: "GET",
+                          headers: {
+                            "Content-Type": "application/json",
+                          },
+                        },
+                      );
+
+                      console.log(
+                        "Invoice API response status:",
+                        invoiceResponse.status,
+                      );
+
+                      clearCart();
+                      toast.success("Order placed successfully!");
+                      setOrderPlaced(true);
+                    } catch (error) {
+                      console.error(
+                        "=== CHECKOUT: Error in payment success handler ===",
+                      );
+                      console.error("Error object:", error);
+                      console.error(
+                        "Error stack:",
+                        error instanceof Error ? error.stack : "No stack trace",
+                      );
+
+                      const errorMessage =
+                        error instanceof Error
+                          ? error.message
+                          : "Failed to process order. Please try again.";
+
+                      console.error("Display message:", errorMessage);
+                      toast.error(errorMessage);
+                    }
                   }}
                   onPaymentError={(error) => {
                     toast.error("Payment failed: " + error);
                   }}
                 />
               </div>
-            </form>
+            </div>
           </div>
 
           {/* Order Summary */}
