@@ -116,7 +116,7 @@ export default function Footer() {
             
             {/* Copyright */}
             <p className="font-jakarta font-medium text-[16px] leading-[22px] text-[#7E7E7E] text-center">
-              © 2022 TeeSpace. All rights reserved.
+              © {new Date().getFullYear()} TheActiverse. All rights reserved.
             </p>
           </div>
         </div>
