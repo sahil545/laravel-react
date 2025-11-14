@@ -10,7 +10,7 @@ export default function Footer() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-12">
             {/* Company Info */}
             <div>
-              <img 
+              <img
                 src="https://api.builder.io/api/v1/image/assets/TEMP/301cba01dbb0a7c87221750b4fc7cac7101ed43d?width=696"
                 alt="The Activelist"
                 className="h-12 w-auto mb-6"
@@ -23,7 +23,8 @@ export default function Footer() {
                   +123 456 7890
                 </p>
                 <p className="font-jakarta font-medium text-[16px] text-[#7E7E7E] leading-[29px]">
-                  3665 Paseo Place, Suite 0960<br />
+                  3665 Paseo Place, Suite 0960
+                  <br />
                   San Diego
                 </p>
               </div>
@@ -35,9 +36,18 @@ export default function Footer() {
                 Information
               </h3>
               <ul className="space-y-5">
-                {["About us", "Our Blog", "Start a Return", "Contact Us", "Shipping FAQ"].map((item) => (
+                {[
+                  "About us",
+                  "Our Blog",
+                  "Start a Return",
+                  "Contact Us",
+                  "Shipping FAQ",
+                ].map((item) => (
                   <li key={item}>
-                    <Link to="/" className="font-jakarta font-medium text-[16px] leading-[29px] text-[#7E7E7E] hover:text-black transition">
+                    <Link
+                      to="/"
+                      className="font-jakarta font-medium text-[16px] leading-[29px] text-[#7E7E7E] hover:text-black transition"
+                    >
                       {item}
                     </Link>
                   </li>
@@ -51,9 +61,18 @@ export default function Footer() {
                 Useful links
               </h3>
               <ul className="space-y-5">
-                {["My Account", "Print Provider", "Become a Partner", "Custom Products", "Make your own shirt"].map((item) => (
+                {[
+                  "My Account",
+                  "Print Provider",
+                  "Become a Partner",
+                  "Custom Products",
+                  "Make your own shirt",
+                ].map((item) => (
                   <li key={item}>
-                    <Link to="/" className="font-jakarta font-medium text-[16px] leading-[29px] text-[#7E7E7E] hover:text-black transition">
+                    <Link
+                      to="/"
+                      className="font-jakarta font-medium text-[16px] leading-[29px] text-[#7E7E7E] hover:text-black transition"
+                    >
                       {item}
                     </Link>
                   </li>
@@ -67,9 +86,18 @@ export default function Footer() {
                 Top Categories
               </h3>
               <ul className="space-y-5">
-                {["Men's Clothing", "Women's Clothing", "Kid's Clothing", "Top Vendors", "Make your own shirt"].map((item) => (
+                {[
+                  "Men's Clothing",
+                  "Women's Clothing",
+                  "Kid's Clothing",
+                  "Top Vendors",
+                  "Make your own shirt",
+                ].map((item) => (
                   <li key={item}>
-                    <Link to="/" className="font-jakarta font-medium text-[16px] leading-[29px] text-[#7E7E7E] hover:text-black transition">
+                    <Link
+                      to="/"
+                      className="font-jakarta font-medium text-[16px] leading-[29px] text-[#7E7E7E] hover:text-black transition"
+                    >
                       {item}
                     </Link>
                   </li>
@@ -83,10 +111,9 @@ export default function Footer() {
                 Newsletter
               </h3>
               <p className="font-jakarta font-medium text-[15px] leading-[27px] text-[#7E7E7E] mb-6">
-                Get the latest news, events & more delivered
-                to your inbox.
+                Get the latest news, events & more delivered to your inbox.
               </p>
-              
+
               {/* Email Input */}
               <div className="relative">
                 <input
@@ -108,12 +135,12 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col items-center gap-6">
             {/* Payment Methods */}
-            <img 
+            <img
               src="https://api.builder.io/api/v1/image/assets/TEMP/4aa9aff5b0a630119db32ae115dfaddf9ca3035a?width=716"
               alt="Payment Methods"
               className="h-8"
             />
-            
+
             {/* Copyright */}
             <p className="font-jakarta font-medium text-[16px] leading-[22px] text-[#7E7E7E] text-center">
               © {new Date().getFullYear()} TheActiverse. All rights reserved.

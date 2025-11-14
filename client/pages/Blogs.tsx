@@ -22,72 +22,84 @@ const blogPosts: BlogPost[] = [
     id: 1,
     slug: "activewear-guide-2024",
     title: "Complete Guide to Activewear in 2024",
-    excerpt: "Discover the latest trends in activewear and how to choose the perfect pieces for your fitness journey.",
+    excerpt:
+      "Discover the latest trends in activewear and how to choose the perfect pieces for your fitness journey.",
     content: "Complete guide content...",
     author: "Sarah Johnson",
     date: "January 15, 2024",
     category: "Fashion",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/e56f332578268103b535949b6bbcf6273889237e?width=810",
+    image:
+      "https://api.builder.io/api/v1/image/assets/TEMP/e56f332578268103b535949b6bbcf6273889237e?width=810",
     readTime: 8,
   },
   {
     id: 2,
     slug: "fitness-tips-beginners",
     title: "Fitness Tips for Beginners: Getting Started Right",
-    excerpt: "Start your fitness journey with these proven tips and strategies from professional trainers.",
+    excerpt:
+      "Start your fitness journey with these proven tips and strategies from professional trainers.",
     content: "Fitness tips content...",
     author: "Mike Chen",
     date: "January 10, 2024",
     category: "Fitness",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/c2c9e11dc4555c8f4aac05da397470754e87d958?width=808",
+    image:
+      "https://api.builder.io/api/v1/image/assets/TEMP/c2c9e11dc4555c8f4aac05da397470754e87d958?width=808",
     readTime: 6,
   },
   {
     id: 3,
     slug: "sustainable-fashion",
     title: "Sustainable Fashion: Why It Matters",
-    excerpt: "Learn about the importance of sustainable fashion and how to make eco-friendly choices.",
+    excerpt:
+      "Learn about the importance of sustainable fashion and how to make eco-friendly choices.",
     content: "Sustainable fashion content...",
     author: "Emma Davis",
     date: "January 5, 2024",
     category: "Sustainability",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/11aeeb5c9eb939a0f1e9724a2aa295e043f67e0b?width=820",
+    image:
+      "https://api.builder.io/api/v1/image/assets/TEMP/11aeeb5c9eb939a0f1e9724a2aa295e043f67e0b?width=820",
     readTime: 7,
   },
   {
     id: 4,
     slug: "gym-equipment-essentials",
     title: "Essential Gym Equipment for Home Workouts",
-    excerpt: "Build the perfect home gym with our comprehensive guide to must-have equipment.",
+    excerpt:
+      "Build the perfect home gym with our comprehensive guide to must-have equipment.",
     content: "Gym equipment content...",
     author: "James Wilson",
     date: "December 28, 2023",
     category: "Fitness",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/f766ece6e4fb68d21ef717a7b8d4ba9696520e5e?width=820",
+    image:
+      "https://api.builder.io/api/v1/image/assets/TEMP/f766ece6e4fb68d21ef717a7b8d4ba9696520e5e?width=820",
     readTime: 9,
   },
   {
     id: 5,
     slug: "workout-nutrition",
     title: "Nutrition Guide for Optimal Performance",
-    excerpt: "Maximize your workouts with the right nutrition. Complete guide to sports nutrition.",
+    excerpt:
+      "Maximize your workouts with the right nutrition. Complete guide to sports nutrition.",
     content: "Nutrition guide content...",
     author: "Lisa Anderson",
     date: "December 20, 2023",
     category: "Health",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/bf737f6f4fb469b042e3ea9308cc8b51c7a6f0b2?width=810",
+    image:
+      "https://api.builder.io/api/v1/image/assets/TEMP/bf737f6f4fb469b042e3ea9308cc8b51c7a6f0b2?width=810",
     readTime: 8,
   },
   {
     id: 6,
     slug: "summer-collection-preview",
     title: "Summer Collection 2024: What's Coming Next",
-    excerpt: "Get an exclusive preview of our upcoming summer collection with latest styles and trends.",
+    excerpt:
+      "Get an exclusive preview of our upcoming summer collection with latest styles and trends.",
     content: "Summer collection content...",
     author: "Rachel Martinez",
     date: "December 15, 2023",
     category: "Fashion",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/5f3c78acce791f5443ba6ae9b87178c55ff39f2c?width=808",
+    image:
+      "https://api.builder.io/api/v1/image/assets/TEMP/5f3c78acce791f5443ba6ae9b87178c55ff39f2c?width=808",
     readTime: 5,
   },
 ];
@@ -96,7 +108,10 @@ export default function Blogs() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  const categories = ["All", ...new Set(blogPosts.map((post) => post.category))];
+  const categories = [
+    "All",
+    ...new Set(blogPosts.map((post) => post.category)),
+  ];
 
   const filteredPosts = blogPosts.filter((post) => {
     const matchesSearch =
@@ -119,7 +134,8 @@ export default function Blogs() {
                 Our Blog
               </h1>
               <p className="font-jakarta font-medium text-[18px] text-[#7E7E7E] max-w-2xl mx-auto">
-                Explore articles on fitness, fashion, health, and activewear trends to keep you informed and inspired.
+                Explore articles on fitness, fashion, health, and activewear
+                trends to keep you informed and inspired.
               </p>
             </div>
 
@@ -282,7 +298,8 @@ export default function Blogs() {
               Subscribe to Our Newsletter
             </h2>
             <p className="font-jakarta font-medium text-[16px] text-white/80 mb-8">
-              Get the latest articles, fitness tips, and fashion trends delivered to your inbox.
+              Get the latest articles, fitness tips, and fashion trends
+              delivered to your inbox.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">

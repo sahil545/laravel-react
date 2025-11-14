@@ -15,7 +15,7 @@ export default function Contact() {
   const [loading, setLoading] = useState(false);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -27,7 +27,12 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.subject ||
+      !formData.message
+    ) {
       toast.error("Please fill in all required fields");
       return;
     }
@@ -63,7 +68,9 @@ export default function Contact() {
                 Get in Touch
               </h1>
               <p className="font-jakarta font-medium text-[18px] text-[#7E7E7E] max-w-2xl mx-auto">
-                Have a question or feedback? We'd love to hear from you. Fill out the form below and we'll get back to you as soon as possible.
+                Have a question or feedback? We'd love to hear from you. Fill
+                out the form below and we'll get back to you as soon as
+                possible.
               </p>
             </div>
           </div>
@@ -226,8 +233,10 @@ export default function Contact() {
                       Address
                     </h3>
                     <p className="font-jakarta font-medium text-[16px] text-[#7E7E7E]">
-                      3665 Paseo Place, Suite 0960<br />
-                      San Diego, CA 92110<br />
+                      3665 Paseo Place, Suite 0960
+                      <br />
+                      San Diego, CA 92110
+                      <br />
                       United States
                     </p>
                   </div>
@@ -245,8 +254,10 @@ export default function Contact() {
                       Business Hours
                     </h3>
                     <p className="font-jakarta font-medium text-[16px] text-[#7E7E7E]">
-                      Monday - Friday: 9:00 AM - 6:00 PM<br />
-                      Saturday: 10:00 AM - 4:00 PM<br />
+                      Monday - Friday: 9:00 AM - 6:00 PM
+                      <br />
+                      Saturday: 10:00 AM - 4:00 PM
+                      <br />
                       Sunday: Closed
                     </p>
                   </div>

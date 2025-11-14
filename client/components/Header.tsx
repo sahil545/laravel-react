@@ -97,7 +97,6 @@ export default function Header() {
               >
                 Seller Sign Up
               </Link>
-
             </div>
           </div>
         </div>

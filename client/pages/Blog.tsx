@@ -22,7 +22,8 @@ const allBlogPosts: BlogPost[] = [
     id: 1,
     slug: "activewear-guide-2024",
     title: "Complete Guide to Activewear in 2024",
-    excerpt: "Discover the latest trends in activewear and how to choose the perfect pieces for your fitness journey.",
+    excerpt:
+      "Discover the latest trends in activewear and how to choose the perfect pieces for your fitness journey.",
     content: `
       <p>Activewear has become more than just gym clothes. It's a lifestyle choice that reflects your commitment to health and wellness. In this comprehensive guide, we'll explore the latest trends, materials, and styling tips to help you build the perfect activewear wardrobe.</p>
 
@@ -49,14 +50,16 @@ const allBlogPosts: BlogPost[] = [
     author: "Sarah Johnson",
     date: "January 15, 2024",
     category: "Fashion",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/e56f332578268103b535949b6bbcf6273889237e?width=810",
+    image:
+      "https://api.builder.io/api/v1/image/assets/TEMP/e56f332578268103b535949b6bbcf6273889237e?width=810",
     readTime: 8,
   },
   {
     id: 2,
     slug: "fitness-tips-beginners",
     title: "Fitness Tips for Beginners: Getting Started Right",
-    excerpt: "Start your fitness journey with these proven tips and strategies from professional trainers.",
+    excerpt:
+      "Start your fitness journey with these proven tips and strategies from professional trainers.",
     content: `
       <p>Starting a fitness journey can be intimidating, but with the right approach and mindset, you can achieve your goals. This guide will help you get started on the right foot.</p>
 
@@ -78,14 +81,16 @@ const allBlogPosts: BlogPost[] = [
     author: "Mike Chen",
     date: "January 10, 2024",
     category: "Fitness",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/c2c9e11dc4555c8f4aac05da397470754e87d958?width=808",
+    image:
+      "https://api.builder.io/api/v1/image/assets/TEMP/c2c9e11dc4555c8f4aac05da397470754e87d958?width=808",
     readTime: 6,
   },
   {
     id: 3,
     slug: "sustainable-fashion",
     title: "Sustainable Fashion: Why It Matters",
-    excerpt: "Learn about the importance of sustainable fashion and how to make eco-friendly choices.",
+    excerpt:
+      "Learn about the importance of sustainable fashion and how to make eco-friendly choices.",
     content: `
       <p>The fashion industry has a significant impact on the environment. By making conscious choices, you can be part of the solution.</p>
 
@@ -109,14 +114,16 @@ const allBlogPosts: BlogPost[] = [
     author: "Emma Davis",
     date: "January 5, 2024",
     category: "Sustainability",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/11aeeb5c9eb939a0f1e9724a2aa295e043f67e0b?width=820",
+    image:
+      "https://api.builder.io/api/v1/image/assets/TEMP/11aeeb5c9eb939a0f1e9724a2aa295e043f67e0b?width=820",
     readTime: 7,
   },
   {
     id: 4,
     slug: "gym-equipment-essentials",
     title: "Essential Gym Equipment for Home Workouts",
-    excerpt: "Build the perfect home gym with our comprehensive guide to must-have equipment.",
+    excerpt:
+      "Build the perfect home gym with our comprehensive guide to must-have equipment.",
     content: `
       <p>With the rise of home workouts, investing in quality equipment is essential. Here's what you need to get started.</p>
 
@@ -135,14 +142,16 @@ const allBlogPosts: BlogPost[] = [
     author: "James Wilson",
     date: "December 28, 2023",
     category: "Fitness",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/f766ece6e4fb68d21ef717a7b8d4ba9696520e5e?width=820",
+    image:
+      "https://api.builder.io/api/v1/image/assets/TEMP/f766ece6e4fb68d21ef717a7b8d4ba9696520e5e?width=820",
     readTime: 9,
   },
   {
     id: 5,
     slug: "workout-nutrition",
     title: "Nutrition Guide for Optimal Performance",
-    excerpt: "Maximize your workouts with the right nutrition. Complete guide to sports nutrition.",
+    excerpt:
+      "Maximize your workouts with the right nutrition. Complete guide to sports nutrition.",
     content: `
       <p>Nutrition plays a crucial role in your fitness success. The right diet can enhance performance, speed up recovery, and help you achieve your goals.</p>
 
@@ -161,14 +170,16 @@ const allBlogPosts: BlogPost[] = [
     author: "Lisa Anderson",
     date: "December 20, 2023",
     category: "Health",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/bf737f6f4fb469b042e3ea9308cc8b51c7a6f0b2?width=810",
+    image:
+      "https://api.builder.io/api/v1/image/assets/TEMP/bf737f6f4fb469b042e3ea9308cc8b51c7a6f0b2?width=810",
     readTime: 8,
   },
   {
     id: 6,
     slug: "summer-collection-preview",
     title: "Summer Collection 2024: What's Coming Next",
-    excerpt: "Get an exclusive preview of our upcoming summer collection with latest styles and trends.",
+    excerpt:
+      "Get an exclusive preview of our upcoming summer collection with latest styles and trends.",
     content: `
       <p>We're excited to announce our upcoming summer collection. Here's a sneak peek at what's coming.</p>
 
@@ -187,7 +198,8 @@ const allBlogPosts: BlogPost[] = [
     author: "Rachel Martinez",
     date: "December 15, 2023",
     category: "Fashion",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/5f3c78acce791f5443ba6ae9b87178c55ff39f2c?width=808",
+    image:
+      "https://api.builder.io/api/v1/image/assets/TEMP/5f3c78acce791f5443ba6ae9b87178c55ff39f2c?width=808",
     readTime: 5,
   },
 ];
@@ -202,7 +214,9 @@ export default function Blog() {
         <Header />
         <div className="min-h-screen bg-white flex items-center justify-center">
           <div className="text-center">
-            <h1 className="font-mirza font-bold text-[48px] mb-4">Post not found</h1>
+            <h1 className="font-mirza font-bold text-[48px] mb-4">
+              Post not found
+            </h1>
             <Link to="/blogs" className="text-[#032088] hover:underline">
               Back to blogs
             </Link>
@@ -237,7 +251,10 @@ export default function Blog() {
         {/* Blog Header */}
         <section className="w-full py-12 md:py-16">
           <div className="max-w-4xl mx-auto px-4">
-            <Link to="/blogs" className="inline-flex items-center gap-2 text-[#032088] font-jakarta font-semibold text-[14px] mb-6 hover:gap-3 transition-all">
+            <Link
+              to="/blogs"
+              className="inline-flex items-center gap-2 text-[#032088] font-jakarta font-semibold text-[14px] mb-6 hover:gap-3 transition-all"
+            >
               <ArrowRight className="w-4 h-4 rotate-180" />
               Back to blogs
             </Link>
@@ -299,10 +316,22 @@ export default function Blog() {
                 className="space-y-6 text-[#333]"
                 dangerouslySetInnerHTML={{
                   __html: post.content
-                    .replace(/<p>/g, '<p class="font-jakarta font-medium text-[16px] leading-[28px] text-[#7E7E7E]">')
-                    .replace(/<h2>/g, '<h2 class="font-mirza font-bold text-[28px] leading-[36px] mt-8 mb-4">')
-                    .replace(/<ul>/g, '<ul class="list-disc list-inside space-y-3">')
-                    .replace(/<li>/g, '<li class="font-jakarta font-medium text-[16px] leading-[28px] text-[#7E7E7E]">'),
+                    .replace(
+                      /<p>/g,
+                      '<p class="font-jakarta font-medium text-[16px] leading-[28px] text-[#7E7E7E]">',
+                    )
+                    .replace(
+                      /<h2>/g,
+                      '<h2 class="font-mirza font-bold text-[28px] leading-[36px] mt-8 mb-4">',
+                    )
+                    .replace(
+                      /<ul>/g,
+                      '<ul class="list-disc list-inside space-y-3">',
+                    )
+                    .replace(
+                      /<li>/g,
+                      '<li class="font-jakarta font-medium text-[16px] leading-[28px] text-[#7E7E7E]">',
+                    ),
                 }}
               />
             </div>
